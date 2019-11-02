@@ -19,6 +19,13 @@ router.get('/',function(request, response){
     
 });
 
+router.get('/profile',function(request, response){
+  admin.getInfo(request.session.email,function(result){    
+      response.render('admin/profile',{user:result});
+  });
+  
+});
+
 router.get('/allUser',function(request, response){
     admin.getAllUser(function(results){    
         response.render('admin/allUser',{users:results});
@@ -48,6 +55,30 @@ router.get('/addDoctor',function(request, response){
     response.render('admin/addDoctor');
 });
 
+router.get('/deleteUser/:id/:email', function(request, response){
+
+	admin.deleteUser(request.params.id, function(status){
+    if(status)
+    {
+      admin.deleteUserLog(request.params.email, function(status){
+        if(status)
+        {
+          response.redirect('/admin/allUser');
+        }
+        else
+        {
+          response.send("error deleting Log");
+        }
+      });
+      
+    }
+    else
+    {
+      response.send("error deleting");
+    }
+	});
+});
+
 router.post('/',function(request, response){
     admin.getInfo(request.session.email,function(result){    
         response.render('admin/index',{user:result});
@@ -56,6 +87,25 @@ router.post('/',function(request, response){
 });
 
 router.post('/addDoctor', function(request, response){
+  request.checkBody('firstName', 'First name field cannot be empty.').notEmpty();
+  request.checkBody('lastName', 'Last name field cannot be empty.').notEmpty();
+  request.checkBody('date', 'Date of Birth field cannot be empty.').notEmpty();
+  request.checkBody('gender', 'Gender must be select.').notEmpty();
+  request.checkBody('phnNo1', 'Phone number cannot be empty').notEmpty();
+  request.checkBody('phnNo1', 'Invalid phone Number').len(10);
+  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
+  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
+  request.checkBody('salary', 'Salary field cannot be empty.').notEmpty();
+  request.checkBody('upfile', 'Please select profile picture.').notEmpty();
+  request.checkBody('password', 'Password field cannot be empty.').notEmpty();
+	request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
+  request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('admin/addDoctor', {errors: err});
+	}else{
     if(request.files){
         var file = request.files.upfile,
           filename=file.name;
@@ -112,9 +162,29 @@ router.post('/addDoctor', function(request, response){
         response.send("No File selected !");
         response.end();
     };
+  }
 });
 
 router.post('/addStaff', function(request, response){
+  request.checkBody('firstName', 'First name field cannot be empty.').notEmpty();
+  request.checkBody('lastName', 'Last name field cannot be empty.').notEmpty();
+  request.checkBody('date', 'Date of Birth field cannot be empty.').notEmpty();
+  request.checkBody('gender', 'Gender must be select.').notEmpty();
+  request.checkBody('phnNo1', 'Phone number cannot be empty').notEmpty();
+  request.checkBody('phnNo1', 'Invalid phone Number').len(10);
+  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
+  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
+  request.checkBody('salary', 'Salary field cannot be empty.').notEmpty();
+  request.checkBody('upfile', 'Please select profile picture.').notEmpty();
+  request.checkBody('password', 'Password field cannot be empty.').notEmpty();
+	request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
+  request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('admin/addStaff', {errors: err});
+	}else{
     if(request.files){
         var file = request.files.upfile,
           filename=file.name;
@@ -170,6 +240,7 @@ router.post('/addStaff', function(request, response){
         response.send("No File selected !");
         response.end();
     };
+  }
 });
 
 

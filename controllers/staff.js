@@ -33,16 +33,15 @@ router.get('/viewProfile',function(request, response){
       response.render('staff/viewProfile',{user:result});
   });
 });
+//update my profile.................
 
-/*
-router.get('/viewProfile',function(request, response){
-  staff.getInfo(request.session.email,function(result){    
-      response.render('staff/viewProfile',{user:result});
+router.get('/updateProfile',function(request, response){
+	staff.getInfo(request.session.email,function(result){    
+      response.render('staff/updateProfile',{user:result});
+  });
 });
 
-router.get('/updateProfile',function(request, response){   
-        response.render('staff/updateProfile');   
-});
+//Rest of mine..........
 
 router.get('/deleteProfile',function(request, response){   
         response.render('staff/deleteProfile');   
@@ -52,7 +51,7 @@ router.get('/viewSchedule',function(request, response){
         response.render('staff/viewSchedule');   
 });
 
-//.............
+//doctor's profile.............
 
 router.get('/doctorSchedule',function(request, response){
     response.render('staff/doctorSchedule');
@@ -64,22 +63,6 @@ router.get('/doctorList',function(request, response){
     
 });
 
-router.get('/doctorList',function(request, response){
-    staff.getAllDoctor(function(results){    
-        response.render('staff/doctorList',{users:results});
-    });
+//........................
 
-router.post('/',function(request, response){
-    response.render('staff/index');
-});
-
-router.post('/',function(request, response){
-    staff.getInfo(request.session.email,function(result){    
-        response.render('staff/index',{user:result});
-    });
-    
-});
-*/
-
-//..........
 module.exports = router;

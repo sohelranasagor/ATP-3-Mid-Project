@@ -18,10 +18,23 @@ router.get('/',function(request, response){
     
 });
 
+//starting...............................................
+router.get('/doctorList',function(request, response){
+    staff.getAllDoctor(function(results){    
+        response.render('staff/doctorList',{users:results});
+    });
+    
+});
+
 //.............
 
-router.get('/viewProfile',function(request, response){   
+/*router.get('/viewProfile',function(request, response){   
         response.render('staff/viewProfile');   
+});
+
+router.get('/viewProfile',function(request, response){
+  staff.getInfo(request.session.email,function(result){    
+      response.render('staff/viewProfile',{user:result});
 });
 
 router.get('/updateProfile',function(request, response){   
@@ -48,9 +61,22 @@ router.get('/doctorList',function(request, response){
     
 });
 
+router.get('/doctorList',function(request, response){
+    staff.getAllDoctor(function(results){    
+        response.render('staff/doctorList',{users:results});
+    });
+
 router.post('/',function(request, response){
     response.render('staff/index');
 });
+
+router.post('/',function(request, response){
+    staff.getInfo(request.session.email,function(result){    
+        response.render('staff/index',{user:result});
+    });
+    
+});
+*/
 
 //..........
 module.exports = router;

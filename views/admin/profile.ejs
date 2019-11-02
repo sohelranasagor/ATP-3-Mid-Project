@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>User List</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Home</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
-		<script type="text/javascript" src="/Script/script.js"></script>
 	</head>
 	<body>
 		<form method="post">
@@ -13,8 +11,8 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-                             <br/><br/><br/>
-                             <a href="/logout"><font color="red">logout</font></a><br/>
+                             <br/><br/>
+                             <font color="white">Welcome, <%= user.name %> </font> <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -59,41 +57,14 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
-					<br>
-					<input type="text" id="myInput" width="75%" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 					<table border="0" width="100%">
-                        <table border="1" width="75%" id="myTable">
-                            <tr id='border' class="header">
-                                <th id='border'>Profile Picture</th>
-                                <th id='border'>Name</td>
-                                <th id='border'>Date of birth</th>
-                                <th id='border'>Gender</th>
-                                <th id='border'>Email</th>
-                                <th id='border'>Cell</th>
-                                <th id='border'>City</th>
-                                <th id='border'>Location</th>
-                                <th id='border'>Action</th>
+                        <br>
+                            <img src="<%= user.pic %>" height="200" width="200" align>
+                            <tr>
+                                <td align="right">Name:</td>
+                                <td><input type="text" name="firstName" placeholder="Please enter First name" value="<%= user.name %>" readonly /> </td>
                             </tr>
                         
-                            <% for(var i=0; i < users.length; i++){ %>
-                        
-                                <tr id='border'>
-                                    <td id='border'>
-                                        <img src="<%= users[i].picture %>" height="42" width="42">
-                                    </td>
-                                    <td id='border'><%= users[i].firstname %> <%= users[i].lastname %></td>
-                                    <td id='border'><%= users[i].dob %></td>
-                                    <td id='border'><%= users[i].gender %></td>
-                                    <td id='border'><%= users[i].email %></td>
-                                    <td id='border'><%= users[i].phone %></td>
-                                    <td id='border'><%= users[i].city %></td>
-                                    <td id='border'><%= users[i].location %></td>
-                                    <td id='border'>
-                                        <a href="/admin/deleteUser/<%= users[i].uid %>/<%= users[i].email %>" class="btn">Delete</a>
-                                    </td>
-                                </tr>
-                            <% } %>
-                        </table>
 					</table>
 				</td>
 				<td width="20%"></td>

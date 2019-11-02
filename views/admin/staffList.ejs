@@ -2,7 +2,9 @@
 <html>
 	<head>
 		<title>Doctor List</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
+		<script type="text/javascript" src="/Script/script.js"></script>
 	</head>
 	<body>
 		<form method="post">
@@ -57,17 +59,19 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
+					<br>
+					<input type="text" id="myInput" width="75%" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 					<table border="0" width="100%">
-                        <table border="1" width="75%">
-                            <tr id='border'>
-                                <td id='border'><h3>Profile Picture</h3></td>
-                                <td id='border'><h3>Dr Name</h3></td>
-                                <td id='border'><h3>Date of birth</h3></td>
-                                <td id='border'><h3>Gender</h3></td>
-                                <td id='border'><h3>Email</h3></td>
-                                <td id='border'><h3>Cell</h3></td>
-                                <td id='border'><h3>Salary</h3></td>
-                                <td id='border'><h3>Action</h3></td>
+                        <table border="1" width="75%" id="myTable">
+                            <tr id='border' class="header">
+                                <th id='border'>Profile Picture</th>
+                                <th id='border'>Staff Name</th>
+                                <th id='border'>Date of birth</th>
+                                <th id='border'>Gender</th>
+                                <th id='border'>Email</th>
+                                <th id='border'>Cell</th>
+                                <th id='border'>Salary</th>
+                                <th id='border'>Action</th>
                             </tr>
                         
                             <% for(var i=0; i < users.length; i++){ %>
@@ -83,7 +87,7 @@
                                     <td id='border'><%= users[i].phone %></td>
                                     <td id='border'><%= users[i].salary %></td>
                                     <td id='border'>
-                                        <a href="/user/delete/<%= users[i].uid %>">Delete</a>
+                                        <a href="/admin/delete/<%= users[i].staffid %>" class="btn">Delete</a>
                                     </td>
                                 </tr>
                             <% } %>

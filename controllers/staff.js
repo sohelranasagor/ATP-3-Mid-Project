@@ -18,20 +18,23 @@ router.get('/',function(request, response){
     
 });
 
-//starting...............................................
+//doctor list...............................................
+
 router.get('/doctorList',function(request, response){
     staff.getAllDoctor(function(results){    
         response.render('staff/doctorList',{users:results});
     });
-    
 });
 
-//.............
+//my profile.............
 
-/*router.get('/viewProfile',function(request, response){   
-        response.render('staff/viewProfile');   
+router.get('/viewProfile',function(request, response){
+	staff.getInfo(request.session.email,function(result){    
+      response.render('staff/viewProfile',{user:result});
+  });
 });
 
+/*
 router.get('/viewProfile',function(request, response){
   staff.getInfo(request.session.email,function(result){    
       response.render('staff/viewProfile',{user:result});

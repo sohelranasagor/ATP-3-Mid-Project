@@ -18,12 +18,11 @@ router.post('/', function(request, response){
   request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
   request.checkBody('city', 'City field cannot be empty.').notEmpty();
   request.checkBody('location', 'Location field cannot be empty.').notEmpty();
-  request.checkBody('upfile', 'Please select profile picture.').notEmpty();
   request.checkBody('password', 'Password field cannot be empty.').notEmpty();
 	request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
   request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
   request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
-  request.checkBody('confirmPassword', 'Password and Confirm password must match.').matches('password');
+  request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.password);
 
 	const err = request.validationErrors();
 

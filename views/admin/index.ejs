@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home</title>
+		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
+	</head>
+	<body>
+		<form method="post">
+			<table border="0" width="100%">
+				<tr height="15%" bgcolor="#23274C">
+					<td width="20%"></td>
+					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
+						<td width="30%" valign="top" align="right">
+                             <br/><br/>
+                             <font color="white">Welcome, <%= user.name %> </font> <br>   <a href="/logout"><font color="red">logout</font></a><br/>
+						</td>
+					</td>
+					<td width="20%"></td>
+				</tr>
+			</table>
+			<table border="0" width="100%">
+				<tr height="7" bgcolor="#616174">
+					<td width="20%"></td>
+					<td width="40" height="40">
+						<ul id="ul">
+                            <li id="q">
+                                <div class="navbar">
+                                        <a href="/admin">Home</a>
+                                        <a href="/admin/profile">My profile</a>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Doctor
+                                        <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                        <a href="/admin/addDoctor">Add Doctor</a>
+                                        <a href="/admin/doctorList">Doctor List</a>
+                                    </div>
+                                    </div> 
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Staff
+                                        <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                        <a href="/admin/addStaff">Add Staff</a>
+                                        <a href="/admin/staffList">Staff List</a>
+                                        </div>
+                                    </div>
+                                    <a href="/admin/allUser">User List</a>
+                                </div>
+                            </li>
+                        </ul>
+                        
+					</td>
+					<td width="20%"></td>
+				</tr>
+			</table>
+			<table border="0" width="100%">
+				<td width="20%"></td>
+				<td>
+					<table border="0" width="100%">
+                        
+                        
+
+
+					</table>
+				</td>
+				<td width="20%"></td>
+			</table>
+			<hr size="3" color="black"/>
+			<table border="0" width="100%">
+				<tr>
+					<td width="20%"></td>
+					<td width="35%">
+						<h2> <b> About </b> </h2>
+						<!--<ul type="circle">
+							<li> <a href="app/others/about.php"><font color="#de312d">About OpenCourseWare </font> </a> </li>
+							<li> <a href="app/others/help.php"><font color="#de312d">Help & FAQs </font> </a> </li>
+							<li> <a href="app/others/contact.php"><font color="#de312d">Contact Us </font> </a> </li>
+							<li> <a href="app/others/privacy.php"><font color="#de312d">Privacy & Terms of Use </font> </a> </li>
+						</ul>-->
+						<vr>
+					</td>
+					<td width="25%" valign="top">
+					</td>
+					<td width="20%"></td>
+				</tr>
+				<tr>
+					<td width="20%"></td>
+					<td colspan="2">
+						<hr>
+					</td>
+					<td width="20%"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

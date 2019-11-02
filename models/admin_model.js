@@ -77,5 +77,29 @@ module.exports = {
 				callback([]);
 			}
 		});	
-    }
+	},
+	deleteUser: function(id, callback){
+		var sql = "delete from users where uid=?";
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
+	},
+	deleteUserLog: function(email, callback){
+		var sql = "delete from login where email=?";
+		db.execute(sql, [email], function(status){
+			callback(status);
+		});
+	},
+	deleteDoctor: function(id, callback){
+		var sql = "delete from doctor where doctorid=?";
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
+	},
+	deleteDoctorLog: function(email, callback){
+		var sql = "delete from login where email=?";
+		db.execute(sql, [email], function(status){
+			callback(status);
+		});
+	}
 }

@@ -23,20 +23,35 @@
 					<td width="20%"></td>
 					<td width="40" height="40">
 						<ul id="ul">
-							<li id="q"><a class="active" href="/staff">Home</a></li>
-						</ul>
+                            <li id="q">
+                                <div class="navbar">
+									<a href="/staff">Home</a>
+									<div class="dropdown">
+										<button class="dropbtn">My profile
+											<i class="fa fa-caret-down"></i>
+										</button>
+										<div class="dropdown-content">
+											<a href="/staff/viewProfile">View Profile</a>
+											<a href="/staff/updateProfile">Update Profile</a>
+											<a href="/staff/deleteprofile">Delete profile</a>
+											<a href="/staff/viewSchedule">View Schedule</a>
+										</div>
+									</div>
+									<div class="dropdown">
+                                        <button class="dropbtn">Doctor
+                                        <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+                                        <a href="/staff/doctorSchedule">View Doctor Schedule</a>
+                                        <a href="/staff/doctorList">View Doctor List</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
 					</td>
 					<td width="20%"></td>
 				</tr>
-			</table>
-			<table border="0" width="100%">
-				<td width="20%"></td>
-				<td>
-					<table border="0" width="100%">
-						<!--ei khane code krte hobe -->
-					</table>
-				</td>
-				<td width="20%"></td>
 			</table>
 			<hr size="3" color="black"/>
 			<table border="0" width="100%">

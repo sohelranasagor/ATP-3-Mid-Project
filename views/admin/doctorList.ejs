@@ -27,8 +27,16 @@
 						<ul id="ul">
                             <li id="q">
                                 <div class="navbar">
-                                        <a href="/admin">Home</a>
-                                        <a href="/admin/profile">My profile</a>
+									<a href="/admin">Home</a>
+									<div class="dropdown">
+										<button class="dropbtn">Profile
+										<i class="fa fa-caret-down"></i>
+										</button>
+										<div class="dropdown-content">
+										<a href="/admin/profile">My profile</a>
+										<a href="/admin/doctorList">Change Password</a>
+									</div>
+									</div> 
                                     <div class="dropdown">
                                         <button class="dropbtn">Doctor
                                         <i class="fa fa-caret-down"></i>
@@ -90,7 +98,7 @@
                                     <td id='border'><%= users[i].department %></td>
                                     <td id='border'><%= users[i].salary %></td>
                                     <td id='border'>
-                                        <a href="/admin/deleteDoctor/<%= users[i].doctorid %>/<%= users[i].email %>" class="btn">Delete</a>
+                                        <a href="/admin/deleteDoctor/<%= users[i].doctorid %>/<%= users[i].email %>" class="btn">Profile</a>
                                     </td>
 								</tr>
 								

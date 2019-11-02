@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Admin Profile</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
@@ -11,8 +11,8 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-                             <br/><br/>
-                             <font color="white">Welcome, <%= user.name %> </font> <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
+                             <br/><br/><br>
+                             <a href="/logout"><font color="red" >logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -25,8 +25,16 @@
 						<ul id="ul">
                             <li id="q">
                                 <div class="navbar">
-                                        <a href="/admin">Home</a>
+                                    <a href="/admin">Home</a>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Profile
+                                        <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div class="dropdown-content">
                                         <a href="/admin/profile">My profile</a>
+                                        <a href="/admin/doctorList">Change Password</a>
+                                    </div>
+                                    </div> 
                                     <div class="dropdown">
                                         <button class="dropbtn">Doctor
                                         <i class="fa fa-caret-down"></i>
@@ -57,13 +65,29 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
+                        
 					<table border="0" width="100%">
                         <br>
-                            <img src="<%= user.pic %>" height="200" width="200" align>
-                            <tr>
-                                <td align="right">Name:</td>
-                                <td><input type="text" name="firstName" placeholder="Please enter First name" value="<%= user.name %>" readonly /> </td>
-                            </tr>
+                        <tr>
+                            <td></td>
+                            <td><img src="<%= user.pic %>" height="200" width="200"></td>
+                        </tr>
+                        <tr>
+                            <td align="right">Name:</td>
+                            <td><input type="text" name="firstName" class="a" placeholder="Please enter First name" value="<%= user.name %>"/> </td>
+                        </tr>
+                        <tr>
+                            <td align="right">email:</td>
+                            <td><input type="text" name="firstName" class="a" placeholder="Please enter email name" value="<%= user.email %>"/> </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Profile Picture:</td>
+                            <td><input type="file" name="upfile" class="a" ></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="submit" value="Update" class="btn" />  </td>
+                        </tr>
                         
 					</table>
 				</td>

@@ -25,17 +25,25 @@
 						<ul id="ul">
                             <li id="q">
                                 <div class="navbar">
-                                        <a href="/admin">Home</a>
-                                        <a href="/admin/profile">My profile</a>
+                                        <a href="/admin">Home</a>     
                                     <div class="dropdown">
-                                        <button class="dropbtn">Doctor
+                                        <button class="dropbtn">Profile
                                         <i class="fa fa-caret-down"></i>
                                         </button>
                                         <div class="dropdown-content">
-                                        <a href="/admin/addDoctor">Add Doctor</a>
-                                        <a href="/admin/doctorList">Doctor List</a>
+										<a href="/admin/profile">My profile</a>
+                                        <a href="/admin/changePassword/<%= user.id %>">Change Password</a>
                                     </div>
-                                    </div> 
+									</div> 
+									<div class="dropdown">
+										<button class="dropbtn">Doctor
+										<i class="fa fa-caret-down"></i>
+										</button>
+										<div class="dropdown-content">
+										<a href="/admin/addDoctor">Add Doctor</a>
+										<a href="/admin/doctorList">Doctor List</a>
+									</div>
+									</div>
                                     <div class="dropdown">
                                         <button class="dropbtn">Staff
                                         <i class="fa fa-caret-down"></i>

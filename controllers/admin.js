@@ -26,6 +26,10 @@ router.get('/profile',function(request, response){
   
 });
 
+router.get('/changePassword/:id',function(request, response){
+  response.render('admin/changePassword');
+});
+
 router.get('/allUser',function(request, response){
     admin.getAllUser(function(results){    
         response.render('admin/allUser',{users:results});
@@ -84,6 +88,55 @@ router.post('/',function(request, response){
         response.render('admin/index',{user:result});
     });
     
+});
+
+router.post('/changePassword/:id',function(request, response){
+  request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
+  request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
+	request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
+  request.checkBody("newPassword", "New password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
+  request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
+  request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.newPassword);
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('admin/changePassword', {errors: err});
+	}else{
+    var log ={
+      email: request.session.email,
+      password: request.body.oldPassword
+    }
+    admin.checkPassword(log, function(result){
+      if(result)
+      {
+        var data ={
+          logId: request.session.lid,
+          password: request.body.newPassword,
+          id: request.params.id
+        }
+        admin.updatePasswordLog(data, function(status){
+          if(status)
+          {
+            admin.updatePassword(data, function(status){
+              if(status)
+              {
+                response.redirect('/admin');
+              }
+            });
+          }
+          else
+          {
+            response.send("Error updating");
+          }
+        });
+      }
+      else
+      {
+        response.send("Your old password is incorrect");
+      }
+    });
+  }
 });
 
 router.post('/addDoctor', function(request, response){

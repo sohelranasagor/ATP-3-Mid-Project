@@ -23,10 +23,11 @@ router.post('/', function(request, response){
         }
         login.validate(user, function(result){
             if(result)
-            {
+            {;
                 if(result.type==1)
                 {
                     request.session.email=request.body.email;
+                    request.session.lid=result.logid;
                     response.redirect('/admin');
                 }
                 else if(result.type==2)

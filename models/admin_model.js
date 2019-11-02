@@ -101,5 +101,29 @@ module.exports = {
 		db.execute(sql, [email], function(status){
 			callback(status);
 		});
+	},
+	checkPassword: function(log, callback){
+		var sql = "select * from login where email=? and password=?";
+		db.getResults(sql, [log.email,log.password], function(result){
+			if(result.length > 0)
+			{
+				callback(true);
+			}
+			else{
+				callback(false);
+			}
+		});
+	},
+	updatePasswordLog: function(data, callback){
+		var sql = "update login set password=? where logid=?";
+		db.execute(sql, [data.password,data.logId], function(status){
+			callback(status);
+		});
+	},
+	updatePassword: function(data, callback){
+		var sql = "update admin set password=? where id=?";
+		db.execute(sql, [data.password,data.id], function(status){
+			callback(status);
+		});
 	}
 }

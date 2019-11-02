@@ -67,7 +67,6 @@
                                 <td id='border'><h3>Cell</h3></td>
                                 <td id='border'><h3>Department</h3></td>
                                 <td id='border'><h3>Salary</h3></td>
-                                <td id='border'><h3>Action</h3></td>
                             </tr>
                         
                             <% for(var i=0; i < users.length; i++){ %>
@@ -82,8 +81,7 @@
                                     <td id='border'><%= users[i].email %></td>
                                     <td id='border'><%= users[i].phone %></td>
                                     <td id='border'><%= users[i].department %></td>
-                                    <td id='border'><%= users[i].salary %></td>
-                                    
+                                    <td id='border'><%= users[i].salary %></td> 
                                 </tr>
                             <% } %>
                         </table>

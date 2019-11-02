@@ -135,6 +135,11 @@ body{
 #myTable tr.header, #myTable tr:hover {
   background-color: #f1f1f1;
 }
+.btn:hover{
+ background: transparent;
+ color: #7F00FF;
+ border: 2px solid #7F00FF;
+}
  .btn{
 	padding: 12px 20px;
 	background: #7F00FF;
@@ -146,8 +151,36 @@ body{
 	font-weight: bold;
 	transition: all .3s ease-in;
 }
- .btn:hover{
-	background: transparent;
-	color: #7F00FF;
-	border: 2px solid #7F00FF;
+
+input[type=submit] {
+  width: 30%;
+  background-color: #7F00FF;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background: transparent;
+}
+
+.a{
+  width: 29%;
+  height: 30px;
+  margin: 8px 0;
+}
+
+.b{
+  width: 5%;
+  height: 30px;
+  margin: 8px 0;
+}
+
+.c{
+  width: 22%;
+  height: 30px;
+  margin: 8px 0;
 }

@@ -13,5 +13,18 @@ module.exports = {
 				callback([]);
 			}
 		});
-    }
+    },
+	
+	getAllDoctor: function(callback){
+		var sql = "select * from doctor";
+		
+		db.getResults(sql, [], function(results){
+			
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});	
+	}
 }

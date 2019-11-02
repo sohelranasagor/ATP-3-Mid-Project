@@ -18,5 +18,39 @@ router.get('/',function(request, response){
     
 });
 
+//.............
 
+router.get('/viewProfile',function(request, response){   
+        response.render('staff/viewProfile');   
+});
+
+router.get('/updateProfile',function(request, response){   
+        response.render('staff/updateProfile');   
+});
+
+router.get('/deleteProfile',function(request, response){   
+        response.render('staff/deleteProfile');   
+});
+
+router.get('/viewSchedule',function(request, response){   
+        response.render('staff/viewSchedule');   
+});
+
+//.............
+
+router.get('/doctorSchedule',function(request, response){
+    response.render('staff/doctorSchedule');
+});
+
+
+router.get('/doctorList',function(request, response){
+	response.render('staff/doctorList');
+    
+});
+
+router.post('/',function(request, response){
+    response.render('staff/index');
+});
+
+//..........
 module.exports = router;

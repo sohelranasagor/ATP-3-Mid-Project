@@ -12,7 +12,7 @@
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
 							 <br/><br/><br/>
-							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="red">logout</font></a><br/>
+							<a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -53,6 +53,59 @@
 					<td width="20%"></td>
 				</tr>
 			</table>
+			
+			<table border="0" width="100%">
+				<td width="20%"></td>
+				<td>
+					<table border="0" width="100%">
+						
+						<tr> 
+                            <td align="right">First name:</td> 
+                            <td><input type="text" name="firstName" placeholder="Please enter First name" /> </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Last name:</td>
+                            <td><input type="text" name="lastName" placeholder="Please ente last name" /> </td>
+                        </tr>
+                        <tr>
+                            <td align="right">DOB:</td>
+                            <td><input type="date" name="date" /> </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Gender:</td>
+                            <td><input type="radio" name="gender" value="Male" />Male
+                                <input type="radio" name="gender" value="Female" />Female
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Phone no:</td>
+                            <td><input type="text" name="phnNo" value="+880" size="1" readonly />
+                                <input type="text" name="phnNo1" id="phnNo1" size="13" > 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Email:</td>
+                            <td><input type="text" name="email" id="email" placeholder="Please enter email"> </td>
+							 
+                        </tr>
+                        <tr>
+                            <td align="right">Profile Picture:</td>
+                            <td><input type="file" name="upfile" ></td>
+                        </tr>
+                        <tr>
+                            <td align="right">Password:</td>
+                            <td><input type="password" name="password" /> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="submit" value="Add Staff" />  </td>
+                        </tr>
+					</table>
+				</td>
+				<td width="20%"></td>
+			</table>
+			
+			
 			<hr size="3" color="black"/>
 			<table border="0" width="100%">
 				<tr>

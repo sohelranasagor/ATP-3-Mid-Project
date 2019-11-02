@@ -12,7 +12,7 @@
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
 							 <br/><br/><br/>
-							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="red">logout</font></a><br/>
+							 <a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -47,11 +47,51 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
-                        
+                        </ul> 
 					</td>
 					<td width="20%"></td>
 				</tr>
+			</table>
+
+			<table border="0" width="100%">
+				<td width="20%"></td>
+				<td>
+					<table border="0" width="100%">
+                        <table border="1" width="75%">
+                            <tr id='border'>
+                                <td id='border'><h3>Profile Picture</h3></td>
+                                <td id='border'><h3>Dr Name</h3></td>
+                                <td id='border'><h3>Date of birth</h3></td>
+                                <td id='border'><h3>Gender</h3></td>
+                                <td id='border'><h3>Email</h3></td>
+                                <td id='border'><h3>Cell</h3></td>
+                                <td id='border'><h3>Department</h3></td>
+                                <td id='border'><h3>Salary</h3></td>
+                                <td id='border'><h3>Action</h3></td>
+                            </tr>
+                        
+                            <% for(var i=0; i < users.length; i++){ %>
+                        
+                                <tr id='border'>
+                                    <td id='border'>
+                                        <img src="<%= users[i].pic %>" height="42" width="42">
+                                    </td>
+                                    <td id='border'><%= users[i].firstname %> <%= users[i].lastname %></td>
+                                    <td id='border'><%= users[i].dob %></td>
+                                    <td id='border'><%= users[i].gender %></td>
+                                    <td id='border'><%= users[i].email %></td>
+                                    <td id='border'><%= users[i].phone %></td>
+                                    <td id='border'><%= users[i].department %></td>
+                                    <td id='border'><%= users[i].salary %></td>
+                                    <td id='border'>
+                                        <a href="/user/delete/<%= users[i].uid %>">Delete</a>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </table>
+					</table>
+				</td>
+				<td width="20%"></td>
 			</table>
 			<hr size="3" color="black"/>
 			<table border="0" width="100%">

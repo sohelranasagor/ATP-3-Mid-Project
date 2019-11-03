@@ -50,9 +50,27 @@ module.exports = {
 		});
 	},
 	updatePassword: function(data, callback){
-		var sql = "update staff set password=? where id=?";
-		db.execute(sql, [data.password,data.id], function(status){
+		var sql = "update staff set password=? where staffid=?";
+		db.execute(sql, [data.password,data.staffid], function(status){
+			callback(status);
+		});
+	},
+	
+	//update profile
+
+	updateStaff: function(data, callback){
+		var sql = "update staff set firstname=?, lastname=?, email=?, pic=? where staffid=3";
+		db.execute(sql, [data.firstname,data.lastname,data.email,data.pic], function(status){
+			callback(status);
+		});
+	},
+	updateStaffLog: function(data, callback){
+		var sql = "update login set email=? where logid=8";
+		db.execute(sql, [data.email], function(status){
 			callback(status);
 		});
 	}
+
 }
+
+

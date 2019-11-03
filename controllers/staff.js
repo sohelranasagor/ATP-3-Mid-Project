@@ -18,6 +18,14 @@ router.get('/',function(request, response){
     
 });
 
+//my profile.............
+
+router.get('/viewProfile',function(request, response){
+	staff.getInfo(request.session.email,function(result){    
+      response.render('staff/viewProfile',{user:result});
+  });
+});
+
 //doctor list...............................................
 
 router.get('/doctorList',function(request, response){
@@ -26,13 +34,8 @@ router.get('/doctorList',function(request, response){
     });
 });
 
-//my profile.............
+//...........
 
-router.get('/viewProfile',function(request, response){
-	staff.getInfo(request.session.email,function(result){    
-      response.render('staff/viewProfile',{user:result});
-  });
-});
 //update my profile.................
 
 router.get('/updateProfile',function(request, response){
@@ -40,6 +43,7 @@ router.get('/updateProfile',function(request, response){
       response.render('staff/updateProfile',{user:result});
   });
 });
+
 
 //Rest of mine..........
 
@@ -61,6 +65,71 @@ router.get('/doctorSchedule',function(request, response){
 router.get('/doctorList',function(request, response){
 	response.render('staff/doctorList');
     
+});
+
+//change password...........
+
+router.get('/changePassword/:id',function(request, response){
+  response.render('staff/changePassword');
+});
+
+//.............
+
+router.post('/',function(request, response){
+    staff.getInfo(request.session.email,function(result){    
+        response.render('staff/index',{user:result});
+    });
+    
+});
+//......
+
+router.post('/changePassword/:id',function(request, response){
+  request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
+  request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
+  request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
+  request.checkBody("newPassword", "New password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
+  request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
+  request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.newPassword);
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('staff/changePassword', {errors: err});
+	}else{
+    var log ={
+      email: request.session.email,
+      password: request.body.oldPassword
+    }
+    staff.checkPassword(log, function(result){
+      if(result)
+      {
+        var data ={
+          logId: request.session.lid,
+          password: request.body.newPassword,
+          id: request.params.id
+        }
+        staff.updatePasswordLog(data, function(status){
+          if(status)
+          {
+            staff.updatePassword(data, function(status){
+              if(status)
+              {
+                response.redirect('/staff');
+              }
+            });
+          }
+          else
+          {
+            response.send("Error updating");
+          }
+        });
+      }
+      else
+      {
+        response.send("Your old password is incorrect");
+      }
+    });
+  }
 });
 
 //........................

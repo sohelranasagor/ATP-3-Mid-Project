@@ -13,8 +13,19 @@ router.get('*', function(request, response, next){
 });
 
 router.get('/',function(request, response){
-    admin.getInfo(request.session.email,function(result){    
-        response.render('admin/index',{user:result});
+    admin.getInfo(request.session.email,function(result){
+      if(result)
+      {
+        admin.getAllPhoto(function(results){
+          if(results)
+          {
+            console.log(results);
+            response.render('admin/index',{user:result,photo:results});
+          }
+        });
+        
+      }   
+        
     });
     
 });
@@ -51,6 +62,13 @@ router.get('/staffList',function(request, response){
     
 });
 
+router.get('/photoGallaryList',function(request, response){
+  admin.getAllPhoto(function(results){    
+      response.render('admin/photoGallaryList',{photo:results});
+  });
+  
+});
+
 router.get('/addStaff',function(request, response){
     response.render('admin/addStaff');
 });
@@ -83,6 +101,15 @@ router.get('/deleteUser/:id/:email', function(request, response){
 	});
 });
 
+router.get('/deletePhotoGallery/:id',function(request, response){
+  admin.deletePhotogallery(request.params.id, function(result){
+    if(result)
+    {
+      response.redirect('/admin/photoGallaryList');
+    }
+  });
+});
+
 router.get('/doctorProfile/:id',function(request, response){
   admin.doctorProfile(request.params.id, function(result){
     response.render('admin/doctorProfile',{user:result});
@@ -95,11 +122,56 @@ router.get('/managedoctorProfile/:id&:email',function(request, response){
   });
 });
 
+router.get('/addPhotegallery',function(request, response){
+    response.render('admin/addPhotegallery');
+});
+
 router.post('/',function(request, response){
     admin.getInfo(request.session.email,function(result){    
         response.render('admin/index',{user:result});
     });
     
+});
+
+router.post('/addPhotegallery', function(request, response){
+  request.checkBody('title', 'Title field cannot be empty.').notEmpty();
+  request.checkBody('des', 'Description field cannot be empty.').notEmpty();
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('admin/addPhotegallery', {errors: err});
+	}else{
+    if(request.files){
+        var file = request.files.upfile,
+          filename=file.name;
+        var uploadpath ='/uploads/' + filename;
+        file.mv("./uploads/"+filename,function(err){
+          if(err){
+            console.log("File Upload Failed",err);
+            console.log(request.files.upfile.tempFilePath);
+            response.send("Error Occured!")
+          }
+          else {
+            var data ={
+              des: request.body.des,
+              title: request.body.title,
+              pic: uploadpath
+            }
+            admin.insertPhoto(data, function(status){
+              if(status)
+              {
+                response.redirect('/admin');
+              }
+            });
+          }
+        });
+      }
+      else {
+        response.send("No File selected !");
+        response.end();
+    };
+  }
 });
 
 router.post('/changePassword/:id',function(request, response){

@@ -12,8 +12,18 @@ router.get('*', function(request, response, next){
 });
 
 router.get('/',function(request, response){
-    user.getInfo(request.session.email,function(result){   
-        response.render('user/index',{user:result});
+    user.getInfo(request.session.email,function(result){ 
+        if(result)
+        {
+          user.getAllPhoto(function(results){
+            if(results)
+            {
+                response.render('user/index',{user:result,photo:results});
+            }
+          });
+          
+        }     
+       
     });
     
 });

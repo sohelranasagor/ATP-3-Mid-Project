@@ -5,7 +5,7 @@
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<table border="0" width="100%">
 				<tr height="15%" bgcolor="#23274C">
 					<td width="20%"></td>
@@ -67,18 +67,29 @@
 				<td>
                         
 					<table border="0" width="100%">
-                        <br>
+						<br>
+						<tr>
+							<td align="right"></td>
+							<td>
+								<%if(typeof errors != "undefined"){%>
+									<% errors.forEach(function(err){ %>
+										<font color="red">*<%=err.msg%></font> <br/>
+									<% }); %>
+								<% } %> 
+								<br/>
+							</td>
+						</tr>
                         <tr>
                             <td></td>
                             <td><img src="<%= user.pic %>" height="200" width="200"></td>
                         </tr>
                         <tr>
                             <td align="right">Name:</td>
-                            <td><input type="text" name="firstName" class="a" placeholder="Please enter First name" value="<%= user.name %>"/> </td>
+                            <td><input type="text" name="name" class="a" placeholder="Please enter First name" value="<%= user.name %>"/> </td>
                         </tr>
                         <tr>
                             <td align="right">email:</td>
-                            <td><input type="text" name="firstName" class="a" placeholder="Please enter email name" value="<%= user.email %>"/> </td>
+                            <td><input type="text" name="email" class="a" placeholder="Please enter email name" value="<%= user.email %>"/> </td>
                         </tr>
                         <tr>
                             <td align="right">Profile Picture:</td>

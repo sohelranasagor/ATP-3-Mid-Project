@@ -79,10 +79,10 @@
 							<% for(var i=0; i < photo.length; i++){ %>
 
 								<div class="left-part">
-									<a target="_blank" href="">
+									<a target="_blank" href="/admin/photoDescription/<%= photo[i].id %>">
 										<img src="<%= photo[i].pic %>" width="800" height="600">
 									</a>
-									<div class="desc"><%= photo[i].title %></div>
+									<div class="desc"><font color="#007D9E"><%= photo[i].title %></font></div>
 								</div>
 
 							<% } %>
@@ -97,7 +97,7 @@
 				<tr>
 					<td width="20%"></td>
 					<td>
-						<br> <br>
+						
 						&copy; Copyright 2019 Hospital Management System
 
 					</td>

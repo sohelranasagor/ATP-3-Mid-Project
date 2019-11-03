@@ -19,7 +19,6 @@ router.get('/',function(request, response){
         admin.getAllPhoto(function(results){
           if(results)
           {
-            console.log(results);
             response.render('admin/index',{user:result,photo:results});
           }
         });
@@ -67,6 +66,12 @@ router.get('/photoGallaryList',function(request, response){
       response.render('admin/photoGallaryList',{photo:results});
   });
   
+});
+
+router.get('/photoDescription/:id',function(request, response){
+  admin.getPhotoDetails(request.params.id,function(result){
+    response.render('admin/photoDescription',{photo:result});
+  });
 });
 
 router.get('/addStaff',function(request, response){
@@ -171,6 +176,53 @@ router.post('/addPhotegallery', function(request, response){
         response.send("No File selected !");
         response.end();
     };
+  }
+});
+
+router.post('/profile',function(request, response){
+  request.checkBody('name', 'Name field cannot be empty.').notEmpty();
+  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
+  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('admin/profile', {errors: err});
+	}else{
+    if(request.files){
+      var file = request.files.upfile,
+        filename=file.name;
+      var uploadpath ='/uploads/' + filename;
+      file.mv("./uploads/"+filename,function(err){
+        if(err){
+          console.log("File Upload Failed",err);
+          console.log(request.files.upfile.tempFilePath);
+          response.send("Error Occured!")
+        }
+        else {
+          var data ={
+            pic: uploadpath,
+            name: request.body.name,
+            email: request.body.email
+          }
+          admin.updateAdmin(data, function(status){
+            if(status)
+            {
+              admin.updateAdminLog(data, function(status){
+                if(status)
+                {
+                  response.redirect('/admin');
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+    else {
+      response.send("No File selected !");
+      response.end();
+    }
   }
 });
 

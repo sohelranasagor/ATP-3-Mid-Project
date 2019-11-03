@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Photo Gallery List</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Staff Profile</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
-		<script type="text/javascript" src="/Script/script.js"></script>
 	</head>
 	<body>
 		<form method="post">
@@ -13,8 +11,8 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-                             <br/><br/><br/>
-                             <a href="/logout"><font color="red">logout</font></a><br/>
+                             <br/><br/>
+                              <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -75,47 +73,33 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
-					<br>
-					<input type="text" id="myInput" width="75%" onkeyup="myFunction()" placeholder="Search for title.." title="Type in a name">
 					<table border="0" width="100%">
-                        <table border="1" width="75%" id="myTable">
-                            <tr id='border' class="header">
-                                <th id='border'>Picture</th>
-                                <th id='border'>title</th>
-                                <th id='border'>Description</th>
-                                <th id='border'>Action</th>
-                            </tr>
-                        
-                            <% for(var i=0; i < photo.length; i++){ %>
-                        
-                                <tr id='border'>
-                                    <td id='border'>
-                                        <img src="<%= photo[i].pic %>" height="42" width="42">
-                                    </td>
-                                    <td id='border'><%= photo[i].title %></td>
-                                    <td id='border'><%= photo[i].description %></td>
-                                    <td id='border'>
-                                        <a href="/admin/deletePhotoGallery/<%= photo[i].id %>" class="btn">Delete</a>
-                                    </td>
-                                </tr>
-                            <% } %>
-                        </table>
+                        <br>
+                        <div class="card">
+                            <img src="<%= user.pic %>" alt="John" style="width:100%">
+                            <h1><%= user.firstname %> <%= user.lastname %></h1>
+                            <p class="title"><%= user.email %></p>
+                            <p><a href="/admin/manageStaffProfile/<%= user.staffid %>&<%= user.email %>" class="pbtn">Manage</a></p>
+                          </div>
+
+
 					</table>
 				</td>
 				<td width="20%"></td>
-			</table><br><br><br><br><br><br>
-            <footer>
-                    <table border="0" width="100%">
-                        <tr>
-                            <td width="20%"></td>
-                            <td>
-                                
-                                &copy; Copyright 2019 Hospital Management System
-        
-                            </td>
-                            <td width="20%"></td>
-                        </tr>
-                    </table>
+            </table>
+            <br><br><br><br><br><br>
+			<footer>
+                <table border="0" width="100%">
+                    <tr>
+                        <td width="20%"></td>
+                        <td>
+                            
+                            &copy; Copyright 2019 Hospital Management System
+    
+                        </td>
+                        <td width="20%"></td>
+                    </tr>
+                </table>
             </footer>
 		</form>
 	</body>

@@ -30,6 +30,22 @@ module.exports = {
 		});
 	},
 	
+	//userlist....
+	
+	getAllUser: function(callback){
+		var sql = "select * from users";
+		
+		db.getResults(sql, [], function(results){
+			
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});	
+    },
+	
+	
 	//update password.....
 	checkPassword: function(log, callback){
 		var sql = "select * from login where email=? and password=?";

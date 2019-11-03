@@ -198,5 +198,35 @@ module.exports = {
 				callback([]);
 			}
 		});
+	},
+	staffProfile: function(id, callback){
+
+		var sql ="select * from staff where staffid=?";
+		db.getResults(sql, [id], function(results){
+			
+			if(results.length > 0){
+				callback(results[0]);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	updateStaff: function(data, callback){
+		var sql = "update staff set salary=? where staffid=?";
+		db.execute(sql, [data.salary,data.id], function(status){
+			callback(status);
+		});
+	},
+	deleteStaffLog: function(data, callback){
+		var sql = "delete from login where email=?";
+		db.execute(sql, [data.email], function(status){
+			callback(status);
+		});
+	},
+	deleteStaff: function(data, callback){
+		var sql = "delete from staff where staffid=?";
+		db.execute(sql, [data.id], function(status){
+			callback(status);
+		});
 	}
 }

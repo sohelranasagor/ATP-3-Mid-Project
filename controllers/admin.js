@@ -127,6 +127,18 @@ router.get('/managedoctorProfile/:id&:email',function(request, response){
   });
 });
 
+router.get('/staffProfile/:id',function(request, response){
+  admin.staffProfile(request.params.id, function(result){
+    response.render('admin/staffProfile',{user:result});
+  });
+});
+
+router.get('/manageStaffProfile/:id&:email',function(request, response){
+  admin.staffProfile(request.params.id, function(result){
+    response.render('admin/manageStaffProfile',{user:result});
+  });
+});
+
 router.get('/addPhotegallery',function(request, response){
     response.render('admin/addPhotegallery');
 });
@@ -460,6 +472,46 @@ router.post('/managedoctorProfile/:id&:email',function(request, response){
           if(status)
           {
             response.redirect('/admin/doctorList');
+          }
+        });
+      }
+      else
+      {
+        response.send("Error Deleting");
+      }
+    });
+  }
+});
+
+router.post('/manageStaffProfile/:id&:email',function(request, response){
+  if(request.body.update)
+  {
+    var data ={
+      id: request.params.id,
+      salary: request.body.salary
+    }
+    admin.updateStaff(data, function(status){
+      
+      if(status)
+      {
+        response.redirect('/admin/staffList');
+      }
+    });
+  }
+
+  if(request.body.delete)
+  {
+    var data ={
+      email: request.params.email,
+      id: request.params.id
+    }
+    admin.deleteStaff(data, function(status){
+      if(status)
+      {
+        admin.deleteStaffLog(data, function(status){
+          if(status)
+          {
+            response.redirect('/admin/staffList');
           }
         });
       }

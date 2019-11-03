@@ -174,5 +174,29 @@ module.exports = {
 		db.execute(sql, [id], function(status){
 			callback(status);
 		});
+	},
+	updateAdmin: function(data, callback){
+		var sql = "update admin set name=?, email=?, pic=? where id=1";
+		db.execute(sql, [data.name,data.email,data.pic], function(status){
+			callback(status);
+		});
+	},
+	updateAdminLog: function(data, callback){
+		var sql = "update login set email=? where logid=2";
+		db.execute(sql, [data.email], function(status){
+			callback(status);
+		});
+	},
+	getPhotoDetails: function(id, callback){
+
+		var sql ="select * from photos where id=?";
+		db.getResults(sql, [id], function(results){
+			
+			if(results.length > 0){
+				callback(results[0]);
+			}else{
+				callback([]);
+			}
+		});
 	}
 }

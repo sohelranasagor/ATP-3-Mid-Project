@@ -62,14 +62,14 @@ router.get('/doctorSchedule',function(request, response){
 });
 
 
-router.get('/doctorList',function(request, response){
+/*router.get('/doctorList',function(request, response){
 	response.render('staff/doctorList');
     
 });
-
+*/
 //change password...........
 
-router.get('/changePassword/:id',function(request, response){
+router.get('/changePassword/:staffid',function(request, response){
   response.render('staff/changePassword');
 });
 
@@ -81,9 +81,61 @@ router.post('/',function(request, response){
     });
     
 });
+//...............my profile posttt
+
+router.post('/updateProfile',function(request, response){
+  request.checkBody('firstName', 'Name field cannot be empty.').notEmpty();
+  request.checkBody('lastName', 'Name field cannot be empty.').notEmpty();
+  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
+  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
+
+	const err = request.validationErrors();
+
+	if(err){		
+		response.render('staff/updateProfile', {errors: err});
+	}else{
+    if(request.files){
+      var file = request.files.upfile,
+        filename=file.name;
+      var uploadpath ='/uploads/' + filename;
+      file.mv("./uploads/"+filename,function(err){
+        if(err){
+          console.log("File Upload Failed",err);
+          console.log(request.files.upfile.tempFilePath);
+          response.send("Error Occured!")
+        }
+        else {
+          var data ={
+            pic: uploadpath,
+            firstname: request.body.firstName,
+			lastname: request.body.lastName,
+            email: request.body.email
+          }
+          staff.updateStaff(data, function(status){
+            if(status)
+            {
+              staff.updateStaffLog(data, function(status){
+                if(status)
+                {
+                  response.redirect('/staff');
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+    else {
+      response.send("No File selected !");
+      response.end();
+    }
+  }
+});
+
+
 //......
 
-router.post('/changePassword/:id',function(request, response){
+router.post('/changePassword/:staffid',function(request, response){
   request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
   request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
   request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
@@ -106,7 +158,7 @@ router.post('/changePassword/:id',function(request, response){
         var data ={
           logId: request.session.lid,
           password: request.body.newPassword,
-          id: request.params.id
+          staffid: request.params.staffid
         }
         staff.updatePasswordLog(data, function(status){
           if(status)

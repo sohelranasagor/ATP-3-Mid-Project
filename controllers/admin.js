@@ -83,6 +83,18 @@ router.get('/deleteUser/:id/:email', function(request, response){
 	});
 });
 
+router.get('/doctorProfile/:id',function(request, response){
+  admin.doctorProfile(request.params.id, function(result){
+    response.render('admin/doctorProfile',{user:result});
+  });
+});
+
+router.get('/managedoctorProfile/:id&:email',function(request, response){
+  admin.doctorProfile(request.params.id, function(result){
+    response.render('admin/managedoctorProfile',{user:result});
+  });
+});
+
 router.post('/',function(request, response){
     admin.getInfo(request.session.email,function(result){    
         response.render('admin/index',{user:result});
@@ -149,7 +161,6 @@ router.post('/addDoctor', function(request, response){
   request.checkBody('email', 'Email field cannot be empty.').notEmpty();
   request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
   request.checkBody('salary', 'Salary field cannot be empty.').notEmpty();
-  request.checkBody('upfile', 'Please select profile picture.').notEmpty();
   request.checkBody('password', 'Password field cannot be empty.').notEmpty();
 	request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
   request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
@@ -228,7 +239,6 @@ router.post('/addStaff', function(request, response){
   request.checkBody('email', 'Email field cannot be empty.').notEmpty();
   request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
   request.checkBody('salary', 'Salary field cannot be empty.').notEmpty();
-  request.checkBody('upfile', 'Please select profile picture.').notEmpty();
   request.checkBody('password', 'Password field cannot be empty.').notEmpty();
 	request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
   request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
@@ -296,7 +306,46 @@ router.post('/addStaff', function(request, response){
   }
 });
 
+router.post('/managedoctorProfile/:id&:email',function(request, response){
+  if(request.body.update)
+  {
+    var data ={
+      id: request.params.id,
+      salary: request.body.salary
+    }
+    admin.updateDoctor(data, function(status){
+      
+      if(status)
+      {
+        console.log("hahah");
+        response.redirect('/admin/doctorList');
+      }
+    });
+  }
 
+  if(request.body.delete)
+  {
+    var data ={
+      email: request.params.email,
+      id: request.params.id
+    }
+    admin.deleteDoctor(data, function(status){
+      if(status)
+      {
+        admin.deleteDoctorLog(data, function(status){
+          if(status)
+          {
+            response.redirect('/admin/doctorList');
+          }
+        });
+      }
+      else
+      {
+        response.send("Error Deleting");
+      }
+    });
+  }
+});
 
 
 

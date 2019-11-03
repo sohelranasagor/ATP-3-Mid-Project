@@ -34,6 +34,14 @@ router.get('/doctorList',function(request, response){
     });
 });
 
+//userlist....
+
+router.get('/userList',function(request, response){
+    staff.getAllUser(function(results){    
+        response.render('staff/userList',{users:results});
+    });
+});
+
 //...........
 
 //update my profile.................

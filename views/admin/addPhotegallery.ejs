@@ -5,14 +5,14 @@
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
-		<form method="post">
+		<form method="post" enctype="multipart/form-data">
 			<table border="0" width="100%">
 				<tr height="15%" bgcolor="#23274C">
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
                              <br/><br/>
-                             <font color="white">Welcome, <%= user.name %> </font> <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
+                              <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -32,7 +32,7 @@
                                         </button>
                                         <div class="dropdown-content">
 										<a href="/admin/profile">My profile</a>
-                                        <a href="/admin/changePassword/<%= user.id %>">Change Password</a>
+                                        <a href="/admin/changePassword">Change Password</a>
                                     </div>
 									</div> 
 									<div class="dropdown">
@@ -59,7 +59,7 @@
 										</button>
 										<div class="dropdown-content">
 										<a href="/admin/addPhotegallery">Add Photo gallery</a>
-										<a href="/admin/photoGallaryList">Photo gallery List</a>
+										<a href="/admin/staffList">Photo gallery List</a>
 										</div>
 									</div>
                                     <a href="/admin/allUser">User List</a>
@@ -75,23 +75,41 @@
 				<td width="20%"></td>
 				<td>
 					<table border="0" width="100%">
-                        <br>
-							<% for(var i=0; i < photo.length; i++){ %>
-
-								<div class="left-part">
-									<a target="_blank" href="">
-										<img src="<%= photo[i].pic %>" width="800" height="600">
-									</a>
-									<div class="desc"><%= photo[i].title %></div>
-								</div>
-
-							<% } %>
-
+                            <tr>
+                                <td align="right"></td>
+                                <td>
+                                    <%if(typeof errors != "undefined"){%>
+                                        <% errors.forEach(function(err){ %>
+                                            <font color="red">*<%=err.msg%></font> <br/>
+                                        <% }); %>
+                                    <% } %> 
+                                    <br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Picture:</td>
+                                <td><input type="file" name="upfile" class="a" ></td>
+                            </tr>
+                            <tr>
+                                <td align="right">Title:</td> <!-- set table data -->
+                                
+                                <td><textarea rows="3" cols="60" type="text"  name="title" placeholder="Please enter something" ></textarea> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Description:</td> <!-- set table data -->
+                                
+                                <td><textarea rows="10" cols="100" type="text" name="des" placeholder="Please enter something" ></textarea> </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" name="submit" value="Add Photo gallery" class="btn" />  </td>
+                            </tr>
 
 					</table>
 				</td>
 				<td width="20%"></td>
 			</table>
+			<hr size="3" color="black"/>
 			<footer>
 			<table border="0" width="100%">
 				<tr>

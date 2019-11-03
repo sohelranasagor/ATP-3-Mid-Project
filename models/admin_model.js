@@ -149,5 +149,30 @@ module.exports = {
 		db.execute(sql, [data.id], function(status){
 			callback(status);
 		});
+	},
+	insertPhoto: function(data, callback){
+
+		var sql ="insert into photos values('', ?, ?, ?)";
+		db.execute(sql, [data.title,data.des, data.pic], function(status){
+			callback(status);
+		});
+	},
+	getAllPhoto: function(callback){
+		var sql = "select * from photos";
+		
+		db.getResults(sql, [], function(results){
+			
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});	
+	},
+	deletePhotogallery: function(id, callback){
+		var sql = "delete from photos where id=?";
+		db.execute(sql, [id], function(status){
+			callback(status);
+		});
 	}
 }

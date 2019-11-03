@@ -58,8 +58,35 @@ router.get('/editprofile/:id',function(request,response){
     });
 });
 
+router.get('/deleteprofile/:id',function(request,response){
+    user.deleteuser(request.params.id,function(result){
+       if(result){
+        response.redirect('/login');
+       }
+    });
+});
+
+router.get('/doctorlist',function(request,response){
+    user.getAllDoctor(function(result){
+        response.render('user/doctorlist',{users:result});
+    });
+});
+
+
 router.post('/editprofile/:id',function(request,response){
-    
+    var data = {
+        id: request.params.id,
+        fname:request.body.firstName,
+        lname:request.body.lastname,
+        dob:request.body.dob,
+        city:request.body.city,
+        location:request.body.location
+    }
+    user.updateUser(data,function(status){
+        if(status){
+            response.redirect('/user/userprofile');
+        }
+    });
 });
   
 

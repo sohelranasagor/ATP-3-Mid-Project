@@ -40,6 +40,7 @@ router.get('/userList',function(request, response){
     staff.getAllUser(function(results){    
         response.render('staff/userList',{users:results});
     });
+    
 });
 
 //...........
@@ -68,7 +69,11 @@ router.get('/viewSchedule',function(request, response){
 router.get('/doctorSchedule',function(request, response){
     response.render('staff/doctorSchedule');
 });
+//user appointment list.......
 
+router.get('/userAppointment',function(request, response){   
+        response.render('staff/userAppointment');   
+});
 
 /*router.get('/doctorList',function(request, response){
 	response.render('staff/doctorList');
@@ -143,7 +148,7 @@ router.post('/updateProfile',function(request, response){
 
 //......
 
-router.post('/changePassword/:staffid',function(request, response){
+router.post('/changePassword/:id',function(request, response){
   request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
   request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
   request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
@@ -166,7 +171,7 @@ router.post('/changePassword/:staffid',function(request, response){
         var data ={
           logId: request.session.lid,
           password: request.body.newPassword,
-          staffid: request.params.staffid
+          id: request.params.id
         }
         staff.updatePasswordLog(data, function(status){
           if(status)

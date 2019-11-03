@@ -3,6 +3,7 @@
 	<head>
 		<title>Home</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
+		<link href="/CSS/style1.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
 		<form method="post">
@@ -11,7 +12,7 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-							 <br/><br/><br/><br/>
+							 <br/><br/><br/></br>
 							 <a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
@@ -40,70 +41,36 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
-					<table border="0" width="100%">
-							<tr height='50%'>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >> Emergency </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td> Hospital >> Narses  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >>  Pediatrics  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-						</tr>
-					</table>
+                    <table border="1" width="75%" id="myTable">
+							
+                        <tr id='border' class="header">
+                            <th id='border'>Profile Picture</th>
+                            <th id='border'>Dr Name</th>
+                            <th id='border'>Date of birth</th>
+                            <th id='border'>Gender</th>
+                            <th id='border'>Email</th>
+                            <th id='border'>Cell</th>
+                            <th id='border'>Department</th>
+                            <th id='border'>Salary</th>
+                        </tr>
+                    
+                        <% for(var i=0; i < users.length; i++){ %>
+                    
+                            <tr id='border'>
+                                <td id='border'>
+                                    <img src="<%= users[i].pic %>" height="42" width="42">
+                                </td>
+                                <td id='border'><%= users[i].firstname %> <%= users[i].lastname %></td>
+                                <td id='border'><%= users[i].dob %></td>
+                                <td id='border'><%= users[i].gender %></td>
+                                <td id='border'><%= users[i].email %></td>
+                                <td id='border'><%= users[i].phone %></td>
+                                <td id='border'><%= users[i].department %></td>
+                                <td id='border'><%= users[i].salary %></td>
+                            </tr>
+                            
+                        <% } %>
+                    </table>
 				</td>
 				<td width="20%"></td>
 			</table>
@@ -133,6 +100,9 @@
 					<td width="20%"></td>
 				</tr>
 			</table>
+			<div class="footer">
+				<p>Footer</p>
+			</div>
 		</form>
 	</body>
 </html>

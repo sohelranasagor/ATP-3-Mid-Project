@@ -3,6 +3,7 @@
 	<head>
 		<title>Home</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
+		<link href="/CSS/style1.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
 		<form method="post">
@@ -11,7 +12,7 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-							 <br/><br/><br/><br/>
+							 <br/><br/><br/></br>
 							 <a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
@@ -41,69 +42,47 @@
 				<td width="20%"></td>
 				<td>
 					<table border="0" width="100%">
-							<tr height='50%'>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >> Emergency </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td> Hospital >> Narses  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >>  Pediatrics  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-						</tr>
-					</table>
+						<td width="20%"></td>
+						<td>
+							<br>
+							<tr>
+								<td></td>
+								<td><img src="<%= user.picture %>" height="200" width="200"></td>
+							</tr>
+							<tr>
+								<td align="right">Name:</td>
+								<td><%= user.firstname%> <%=user.lastname %></td>
+							</tr>
+							<tr>
+								<td align="right">email:</td>
+								<td><%= user.email %></td>
+							</tr>
+							<tr>
+								<td align="right">Phone Number:</td>
+								<td><%= user.phone %></td>
+							</tr>
+							<tr>
+								<td align="right">Date of Birth</td>
+								<td><%= user.dob %></td>
+							</tr>
+							<tr>
+								<td align="right">Gender:</td>
+								<td><%= user.gender %></td>
+							</tr>
+							<tr>
+								<td align="right">City:</td>
+								<td><%= user.city %></td>
+							</tr>
+							<tr>
+								<td align="right">Location:</td>
+								<td><%= user.location%></td>
+							</tr>
+							<tr>
+								<td align="middle"><a href="/user/editprofile/<%= user.uid%>" class="btn">Edit</a></td>
+								<td align="middle"><a href="/user/deleteprofile/<%= user.uid%>"  class="btn">Delete</a></td>
+							</tr>
+							
+						</table>
 				</td>
 				<td width="20%"></td>
 			</table>
@@ -133,6 +112,9 @@
 					<td width="20%"></td>
 				</tr>
 			</table>
+			<div class="footer">
+				<p>Footer</p>
+			</div>
 		</form>
 	</body>
 </html>

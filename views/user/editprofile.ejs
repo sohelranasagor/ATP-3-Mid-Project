@@ -11,7 +11,7 @@
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-							 <br/><br/><br/><br/>
+							 <br/><br/><br/></br>
 							 <a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
@@ -40,70 +40,39 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
-					<table border="0" width="100%">
-							<tr height='50%'>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >> Emergency </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td> Hospital >> Narses  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-							<td>
-								<tr>
-									<td><img src="../uploads/index1.jpg" alt=""></td>
-								</tr>
-								<tr>
-									<td>Department of >>  Pediatrics  </td>
-								</tr>
-								<tr>
-									<td>Speciality</td>
-								</tr>
-								<tr>
-									<td>Degrees</td>
-								</tr>
-								<tr>
-									<td>Experience</td>
-								</tr>
-								<tr>
-									<td>Email</td>
-								</tr>
-							</td>
-						</tr>
-					</table>
+                </table>
+                <table border="0" width="100%">
+                    <td width="20%"></td>
+                    <td>
+                            
+                        <table border="0" width="100%">
+                            <br>
+                            <tr>
+                                <td align="right">Fastname:</td>
+                                <td><input type="text" name="firstName" class="a" placeholder="Please enter First name" value="<%= user.firstname %>"/> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Lastname:</td>
+                                <td><input type="text" name="lastname" class="a" placeholder="Please enter Last name" value="<%= user.lastname %>"/> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Date of birth:</td>
+                                <td><input type="text" name="dob" class="a" placeholder="Please enter DOB" value="<%= user.dob %>"/> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">City:</td>
+                                <td><input type="text" name="city" class="a" placeholder="Please enter City" value="<%= user.city %>"/> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">location:</td>
+                                <td><input type="text" name="location" class="a" placeholder="Please enter Location" value="<%= user.location %>"/> </td>
+							</tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" name="submit" value="Update" class="btn" />  </td>
+                            </tr>
+                            
+                        </table>
 				</td>
 				<td width="20%"></td>
 			</table>
@@ -133,6 +102,9 @@
 					<td width="20%"></td>
 				</tr>
 			</table>
+			<div class="footer">
+				<p>Footer</p>
+			</div>
 		</form>
 	</body>
 </html>

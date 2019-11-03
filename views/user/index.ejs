@@ -13,7 +13,7 @@
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
 							 <br/><br/><br/>
-							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="red">logout</font></a><br/>
+							 <font color="white">Welcome,<a href="/user/userprofile"> <%= user.firstname %> <%= user.lastname %> </a></font> <br><a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -30,6 +30,7 @@
 							<li id="q"><a class="active" href="/user/department">Departmant</a></li>
 							<li id="q"><a class="active" href="/user/noticebord">Notice Board</a></li>
 							<li id="q"><a class="active" href="/user/narses">Nurses</a></li>
+							<li id="q"><a class="active" href="/user/doctorlist">Doctor List</a></li>
 							<li id="q"><a class="active" href="/user/gallery">Gallery</a></li>
 							<li id="q"><a class="active" href="/user/contactus">Contact us</a></li>
 						</ul>
@@ -42,20 +43,7 @@
 				<td>
 					<table border="0" width="100%">
 						<!--ei khane code krte hobe -->
-						<tr height="7" bgcolor="#616174">
-							<td width="20%"></td>
-							<td width="40" hight="40">
-								<table width="100%">
-									<tr>
-										<td width="40"></td>
-										<td width='40'><input type="text" name="search">
-										<input type="submit" name="submit" value="submit"></td>
-										<td width="20"></td>
-									</tr>
-								</table>
-							</td>
-							<td width="20%"></td>
-						</tr>
+						<br>
 						<tr>
 							<td width="20%"></td>
 							<td width="40%" >

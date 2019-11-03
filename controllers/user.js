@@ -45,9 +45,25 @@ router.get('/noticebord',function(request, response){
 router.get('/gallery',function(request, response){   
     response.render('user/gallery');   
 });
-router.get('/userprofile',function(request, response){   
-    response.render('user/userprofile');   
+router.get('/userprofile',function(request, response){ 
+    user.getInfo(request.session.email, function(result){
+        response.render('user/userprofile',{user:result});
+    });  
+       
+});
+router.get('/editprofile/:id',function(request, response){   
+    response.render('user/editprofile');   
 });
 
+router.post('/userprofile/:id',function(request,response){
+    user.getInfo(request.session.email,function(result){
+        response.render('user/userprofile',{user:result});
+    });
+});
+
+router.post('/editprofile/:id',function(request,response){
+    
+});
+  
 
 module.exports = router;

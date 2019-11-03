@@ -75,14 +75,19 @@ router.get('/userAppointment',function(request, response){
         response.render('staff/userAppointment');   
 });
 
-/*router.get('/doctorList',function(request, response){
-	response.render('staff/doctorList');
-    
+//Messages.....
+
+router.get('/messages',function(request, response){   
+        response.render('staff/messages');   
 });
-*/
+
+router.get('/inbox',function(request, response){   
+        response.render('staff/inbox');   
+});
+
 //change password...........
 
-router.get('/changePassword/:staffid',function(request, response){
+router.get('/changePassword',function(request, response){
   response.render('staff/changePassword');
 });
 

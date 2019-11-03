@@ -12,7 +12,7 @@
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
 							 <br/><br/><br/>
-							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="red">logout</font></a><br/>
+							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="#B8FFEB">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -56,6 +56,15 @@
 											<a href="/staff/userList">View Patient List</a>
 										</div>
 									</div>
+									<div class="dropdown">
+                                        <button class="dropbtn">Messages
+											<i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div class="dropdown-content">
+											<a href="/staff/inbox">Inbox</a>
+											
+										</div>
+									</div>
                                 </div>
                             </li>
                         </ul>
@@ -65,6 +74,8 @@
 				</tr>
 			</table>
 			<hr size="3" color="black"/>
+			
+			
 			<table border="0" width="100%">
 				<tr>
 					<td width="20%"></td>

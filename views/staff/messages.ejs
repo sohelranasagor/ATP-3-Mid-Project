@@ -12,7 +12,7 @@
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
 							 <br/><br/><br/>
-							 <a href="/logout"><font color="red">logout</font></a><br/>
+							 <font color="white">Welcome, <%= user.firstname %> <%= user.lastname %> </font> <br><a href="/logout"><font color="#B8FFEB">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -67,47 +67,11 @@
 									</div>
                                 </div>
                             </li>
-                        </ul> 
+                        </ul>
+                        
 					</td>
 					<td width="20%"></td>
 				</tr>
-			</table>
-
-			<table border="0" width="100%">
-				<td width="20%"></td>
-				<td>
-					<table border="0" width="100%">
-                        <table border="1" width="75%">
-                            <tr id='border' class="header">
-                                <th id='border'>Profile Picture</th>
-                                <th id='border'>Name</td>
-                                <th id='border'>Date of birth</th>
-                                <th id='border'>Gender</th>
-                                <th id='border'>Email</th>
-                                <th id='border'>Cell</th>
-                                <th id='border'>City</th>
-                                <th id='border'>Location</th>     
-                            </tr>
-                        
-                            <% for(var i=0; i < users.length; i++){ %>
-                        
-                                <tr id='border'>
-                                    <td id='border'>
-                                        <img src="<%= users[i].picture %>" height="42" width="42">
-                                    </td>
-                                    <td id='border'><%= users[i].firstname %> <%= users[i].lastname %></td>
-                                    <td id='border'><%= users[i].dob %></td>
-                                    <td id='border'><%= users[i].gender %></td>
-                                    <td id='border'><%= users[i].email %></td>
-                                    <td id='border'><%= users[i].phone %></td>
-                                    <td id='border'><%= users[i].city %></td>
-                                    <td id='border'><%= users[i].location %></td>
-                                </tr>
-                            <% } %>
-                        </table>
-					</table>
-				</td>
-				<td width="20%"></td>
 			</table>
 			<hr size="3" color="black"/>
 			<table border="0" width="100%">

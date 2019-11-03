@@ -43,121 +43,34 @@
 				<td>
 					<table border="0" width="100%">
 						<!--ei khane code krte hobe -->
+						<table border="0" width="100%">
 						<br>
-						<tr>
-							<td width="20%"></td>
-							<td width="40%" >
-								<div class="main">
-									<div class="left-part">
-										<img src="../uploads/index.jpg" alt="">
-										<h1>this is headline</h1>
-										<p>this is paragraph.
-											A paragraph is a series of related sentences developing a central 
-											idea, called the topic. Try to think about paragraphs in terms of 
-											thematic unity: a paragraph is a sentence or a group of sentences 
-											that supports one central, unified idea. Paragraphs add one idea at 
-											a time to your broader argument.</p>
-										</div>
-										<div class="middle-part">
-											<img src="../uploads/images.jpg" alt="">
-											<h1>this is headline</h1>
-											<p>this is paragraph.
-												A paragraph is a series of related sentences developing a central 
-												idea, called the topic. Try to think about paragraphs in terms of 
-												thematic unity: a paragraph is a sentence or a group of sentences 
-												that supports one central, unified idea. Paragraphs add one idea at 
-												a time to your broader argument.</p>
-										</div>
-										<div class="right-part">
-											<img src="../uploads/index1.jpg" alt="">
-											<h1>this is headline</h1>
-											<p>this is paragraph.
-												A paragraph is a series of related sentences developing a central 
-												idea, called the topic. Try to think about paragraphs in terms of 
-												thematic unity: a paragraph is a sentence or a group of sentences 
-												that supports one central, unified idea. Paragraphs add one idea at 
-												a time to your broader argument.</p>
-										</div>
-									</div>
-								</td>
-								<td width="20%"></td>
-							</tr>
-							<tr>
-								<td width='20%'></td>
-								<td width='40%'>
-									<table border='1' width='100%'>
-										<tr height='50%'>
-											<td>
-												<tr>
-													<td><img src="../uploads/index1.jpg" alt=""></td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-													<td>this is img</td>
-												</tr>
-											</td>
-											<td>
-												<tr>
-													<td><img src="../uploads/index1.jpg" alt=""></td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-													<td>this is img</td>
-												</tr>
-											</td>
-											<td>
-												<tr>
-													<td><img src="../uploads/index1.jpg" alt=""></td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-												</tr>
-												<tr>
-													<td>this is img</td>
-													<td>this is img</td>
-												</tr>
-											</td>
-										</tr>
-									</table>
-								</td>
-								<td width='20'></td>
-							</tr>
+							<% for(var i=0; i < photo.length; i++){ %>
+								<div class="left-part">
+									<a target="_blank" href="/admin/photoDescription/<%= photo[i].id %>">
+										<img src="<%= photo[i].pic %>" width="800" height="600">
+									</a>
+									<div class="desc"><font color="#007D9E"><%= photo[i].title %></font></div>
+								</div>
+							<% } %>
+					</table>
 					</table>
 				</td>
 				<td width="20%"></td>
 			</table>
-			<hr size="3" color="black"/>
+			<footer>
 			<table border="0" width="100%">
 				<tr>
 					<td width="20%"></td>
-					<td width="35%">
-						<h2> <b> About </b> </h2>
-						<!--<ul type="circle">
-							<li> <a href="app/others/about.php"><font color="#de312d">About OpenCourseWare </font> </a> </li>
-							<li> <a href="app/others/help.php"><font color="#de312d">Help & FAQs </font> </a> </li>
-							<li> <a href="app/others/contact.php"><font color="#de312d">Contact Us </font> </a> </li>
-							<li> <a href="app/others/privacy.php"><font color="#de312d">Privacy & Terms of Use </font> </a> </li>
-						</ul>-->
-						<vr>
-					</td>
-					<td width="25%" valign="top">
-					</td>
-					<td width="20%"></td>
-				</tr>
-				<tr>
-					<td width="20%"></td>
-					<td colspan="2">
-						<hr>
+					<td>
+						
+						&copy; Copyright 2019 Hospital Management System
+
 					</td>
 					<td width="20%"></td>
 				</tr>
 			</table>
+			</footer>
 		</form>
 	</body>
 </html>

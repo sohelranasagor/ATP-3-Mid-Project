@@ -51,13 +51,10 @@ router.get('/userprofile',function(request, response){
     });  
        
 });
-router.get('/editprofile/:id',function(request, response){   
-    response.render('user/editprofile');   
-});
 
-router.post('/userprofile/:id',function(request,response){
+router.get('/editprofile/:id',function(request,response){
     user.getInfo(request.session.email,function(result){
-        response.render('user/userprofile',{user:result});
+        response.render('user/editprofile',{user:result});
     });
 });
 

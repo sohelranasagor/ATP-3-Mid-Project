@@ -39,5 +39,18 @@ module.exports = {
 				callback([]);
 			}
 		});	
-    }
+	},
+	
+	getAllPhoto: function(callback){
+		var sql = "select * from photos";
+		
+		db.getResults(sql, [], function(results){
+			
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback([]);
+			}
+		});	
+	}
 }

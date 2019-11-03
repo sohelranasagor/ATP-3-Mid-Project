@@ -90,12 +90,6 @@ module.exports = {
 			callback(status);
 		});
 	},
-	deleteDoctor: function(id, callback){
-		var sql = "delete from doctor where doctorid=?";
-		db.execute(sql, [id], function(status){
-			callback(status);
-		});
-	},
 	deleteDoctorLog: function(email, callback){
 		var sql = "delete from login where email=?";
 		db.execute(sql, [email], function(status){
@@ -123,6 +117,36 @@ module.exports = {
 	updatePassword: function(data, callback){
 		var sql = "update admin set password=? where id=?";
 		db.execute(sql, [data.password,data.id], function(status){
+			callback(status);
+		});
+	},
+	doctorProfile: function(id, callback){
+
+		var sql ="select * from doctor where doctorid=?";
+		db.getResults(sql, [id], function(results){
+			
+			if(results.length > 0){
+				callback(results[0]);
+			}else{
+				callback([]);
+			}
+		});
+	},
+	updateDoctor: function(data, callback){
+		var sql = "update doctor set salary=? where doctorid=?";
+		db.execute(sql, [data.salary,data.id], function(status){
+			callback(status);
+		});
+	},
+	deleteDoctorLog: function(data, callback){
+		var sql = "delete from login where email=?";
+		db.execute(sql, [data.email], function(status){
+			callback(status);
+		});
+	},
+	deleteDoctor: function(data, callback){
+		var sql = "delete from doctor where doctorid=?";
+		db.execute(sql, [data.id], function(status){
 			callback(status);
 		});
 	}

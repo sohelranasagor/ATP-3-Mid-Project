@@ -52,8 +52,13 @@ router.get('/noticebord',function(request, response){
     response.render('user/noticebord');   
 });
 
-router.get('/gallery',function(request, response){   
-    response.render('user/gallery');   
+router.get('/gallery',function(request, response){    
+  user.getAllPhoto(function(results){
+    if(results)
+    {
+        response.render('user/gallery',{photo:results});
+    }
+  });   
 });
 router.get('/userprofile',function(request, response){ 
     user.getInfo(request.session.email, function(result){

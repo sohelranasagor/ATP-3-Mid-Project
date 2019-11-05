@@ -33,16 +33,19 @@ router.post('/', function(request, response){
                 else if(result.type==2)
                 {
                     request.session.email=request.body.email;
+                    request.session.lid=result.logid;
                     response.redirect('/doctor');
                 }
                 else if(result.type==3)
                 {
                     request.session.email=request.body.email;
+                    request.session.lid=result.logid;
                     response.redirect('/staff');
                 }
                 else if(result.type==4)
                 {
                     request.session.email=request.body.email;
+                    request.session.lid=result.logid;
                     response.redirect('/user');
                 }
                 else

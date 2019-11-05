@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Add Photo Gallery</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
@@ -25,7 +25,7 @@
 						<ul id="ul">
                             <li id="q">
 
-                            	   <div class="navbar">
+   <div class="navbar">
                                         <a href="/doctor">Home</a>     
                                     <div class="dropdown">
                                         <button class="dropbtn">Profile
@@ -90,8 +90,6 @@
 
 
 
-
-
                             </li>
                         </ul>
                         
@@ -103,10 +101,7 @@
 				<td width="20%"></td>
 				<td>
 					<table border="0" width="100%">
-                           
-                          <!--  paste here  -->
-
-                         <tr>
+                            <tr>
                                 <td align="right"></td>
                                 <td>
                                     <%if(typeof errors != "undefined"){%>
@@ -117,62 +112,43 @@
                                     <br/>
                                 </td>
                             </tr>
-
-                            <tr> 
-                                <!-- set table data -->
-                                <td align="right">Patient Name:</td>
-                                <td><input type="text"  name="pname" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-
-                             <tr>
-                                <td align="right">Patient Age:</td> <!-- set table data -->
-                                
-                                <td><input  type="text"  name="age" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-							 <tr>
-                                <td align="right">Date of Appointment:</td> <!-- set table data -->
-                                   
-                           <td><input type="date" name="appoint" /> <font color="red"><label><?=$error2?></label></font> </td>
-
-                            </tr>
-
-
- 							<tr>
-                                <td align="right">Doctor Name:</td> <!-- set table data -->
-                                
-                                <td><input type="text"  name="dname" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-
-
-                          <tr>
-                                <td align="right">Medicine:</td> <!-- set table data -->
-                                
-                                <td><textarea rows="8" cols="80" type="text" name="med" placeholder="Please enter something" ></textarea> </td>
-                            </tr>
-
-
-
-
-
-
                             <tr>
-                                <td align="right">Advice:</td> <!-- set table data -->
+                                <td align="right">Picture:</td>
+                                <td><input type="file" name="upfile" class="a" ></td>
+                            </tr>
+                            <tr>
+                                <td align="right">Title:</td> <!-- set table data -->
                                 
-                                <td><textarea rows="8" cols="80" type="text" name="des" placeholder="Please enter something" ></textarea> </td>
+                                <td><textarea rows="3" cols="60" type="text"  name="title" placeholder="Please enter something" ></textarea> </td>
+                            </tr>
+                            <tr>
+                                <td align="right">Description:</td> <!-- set table data -->
+                                
+                                <td><textarea rows="10" cols="100" type="text" name="des" placeholder="Please enter something" ></textarea> </td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="submit" name="submit" value="Make Prescription" class="btn" />  </td>
+                                <td><input type="submit" name="submit" value="Add Photo gallery" class="btn" />  </td>
                             </tr>
 
 					</table>
 				</td>
 				<td width="20%"></td>
+            </table>
+            <br><br><br><br><br><br>
+			<footer>
+			<table border="0" width="100%">
+				<tr>
+					<td width="20%"></td>
+					<td>
+						<br> <br>
+						&copy; Copyright 2019 Hospital Management System
+
+					</td>
+					<td width="20%"></td>
+				</tr>
 			</table>
-			
+			</footer>
 		</form>
 	</body>
 </html>

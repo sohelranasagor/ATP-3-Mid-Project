@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Patient List</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
+		<script type="text/javascript" src="/Script/script.js"></script>
 	</head>
 	<body>
-		<form method="post" enctype="multipart/form-data">
+		<form method="post">
 			<table border="0" width="100%">
 				<tr height="15%" bgcolor="#23274C">
 					<td width="20%"></td>
 					<td valign="top"> <h2> <b> <font color="#CACBD5">Hospital </font><font color="white">Management System</font> </b> </h2>
 						<td width="30%" valign="top" align="right">
-                             <br/><br/>
-                              <br>   <a href="/logout"><font color="red" >logout</font></a><br/>
+                             <br/><br/><br/>
+                             <a href="/logout"><font color="red">logout</font></a><br/>
 						</td>
 					</td>
 					<td width="20%"></td>
@@ -23,9 +25,9 @@
 					<td width="20%"></td>
 					<td width="40" height="40">
 						<ul id="ul">
-                            <li id="q">
+							<li id="q">
 
-                            	   <div class="navbar">
+                                <div class="navbar">
                                         <a href="/doctor">Home</a>     
                                     <div class="dropdown">
                                         <button class="dropbtn">Profile
@@ -87,12 +89,7 @@
 										</div>
 									   </div>
 
-
-
-
-
-
-                            </li>
+							</li>
                         </ul>
                         
 					</td>
@@ -102,77 +99,58 @@
 			<table border="0" width="100%">
 				<td width="20%"></td>
 				<td>
+					<br>
+					<input type="text" id="myInput" width="75%" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 					<table border="0" width="100%">
-                           
-                          <!--  paste here  -->
-
-                         <tr>
-                                <td align="right"></td>
-                                <td>
-                                    <%if(typeof errors != "undefined"){%>
-                                        <% errors.forEach(function(err){ %>
-                                            <font color="red">*<%=err.msg%></font> <br/>
-                                        <% }); %>
-                                    <% } %> 
-                                    <br/>
-                                </td>
-                            </tr>
-
-                            <tr> 
-                                <!-- set table data -->
-                                <td align="right">Patient Name:</td>
-                                <td><input type="text"  name="pname" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-
-                             <tr>
-                                <td align="right">Patient Age:</td> <!-- set table data -->
+                        <table border="1" width="75%" id="myTable">
+							
+                            <tr id='border' class="header">
+                               
+                                <th id='border'>Patient Name</th>
+                                 <th id='border'>Gender</th>
+                                <th id='border'>Patient Age</th>
+                                <th id='border'>Phone</th>
+                                <th id='border'>Appointment Date</th>
+                                <th id='border'>Profile</th>
                                 
-                                <td><input  type="text"  name="age" placeholder="Please enter something" ></input> </td>
                             </tr>
+                        
+                            <% for(var i=0; i < users.length; i++){ %>
+                        
+                                <tr id='border'>
+                                    
+                               
+                                    <td id='border'><%= users[i].pname %></td>
+                                    <td id='border'><%= users[i].gender %></td>
+                                    <td id='border'><%= users[i].age %></td>
+                                    <td id='border'><%= users[i].phone %></td>
+                                    <td id='border'><%= users[i].date %></td>
+                                  
+                                    <td id='border'>
+                                        <a href="/doctor/PatientProfile/<%= users[i].id %>" class="btn">Profile</a>
+                                    </td>
+								</tr>
+								
 
-							 <tr>
-                                <td align="right">Date of Appointment:</td> <!-- set table data -->
-                                   
-                           <td><input type="date" name="appoint" /> <font color="red"><label><?=$error2?></label></font> </td>
-
-                            </tr>
-
-
- 							<tr>
-                                <td align="right">Doctor Name:</td> <!-- set table data -->
-                                
-                                <td><input type="text"  name="dname" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-
-
-                          <tr>
-                                <td align="right">Medicine:</td> <!-- set table data -->
-                                
-                                <td><textarea rows="8" cols="80" type="text" name="med" placeholder="Please enter something" ></textarea> </td>
-                            </tr>
-
-
-
-
-
-
-                            <tr>
-                                <td align="right">Advice:</td> <!-- set table data -->
-                                
-                                <td><textarea rows="8" cols="80" type="text" name="des" placeholder="Please enter something" ></textarea> </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" name="submit" value="Make Prescription" class="btn" />  </td>
-                            </tr>
-
+                            <% } %>
+                        </table>
 					</table>
 				</td>
 				<td width="20%"></td>
-			</table>
-			
+			</table><br><br><br><br><br><br>
+			<footer>
+					<table border="0" width="100%">
+						<tr>
+							<td width="20%"></td>
+							<td>
+								
+								&copy; Copyright 2019 Hospital Management System
+		
+							</td>
+							<td width="20%"></td>
+						</tr>
+					</table>
+			</footer>
 		</form>
 	</body>
 </html>

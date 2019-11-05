@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Home</title>
+		<title>Add Schedule</title>
 		<link href="/CSS/style.css" rel="stylesheet" type="text/css" >
 	</head>
 	<body>
@@ -25,7 +25,10 @@
 						<ul id="ul">
                             <li id="q">
 
-                            	   <div class="navbar">
+
+
+                               
+                                 <div class="navbar">
                                         <a href="/doctor">Home</a>     
                                     <div class="dropdown">
                                         <button class="dropbtn">Profile
@@ -90,8 +93,6 @@
 
 
 
-
-
                             </li>
                         </ul>
                         
@@ -118,54 +119,31 @@
                                 </td>
                             </tr>
 
+
+
+                              <tr>
+                            <td align="right">Date:</td>
+                            <td><input type="date" name="date" /> <font color="red"><label><?=$error2?></label></font> </td>
+                        </tr>
+
                             <tr> 
                                 <!-- set table data -->
-                                <td align="right">Patient Name:</td>
-                                <td><input type="text"  name="pname" placeholder="Please enter something" ></input> </td>
+                                <td align="right">Time:</td>
+                                <td><input type="text"  name="time" placeholder="Please enter time" ></input> </td>
                             </tr>
 
+                           
 
-                             <tr>
-                                <td align="right">Patient Age:</td> <!-- set table data -->
+                               <tr>
+                                <td align="right">Duty/Activity:</td> <!-- set table data -->
                                 
-                                <td><input  type="text"  name="age" placeholder="Please enter something" ></input> </td>
+                                <td><textarea rows="10" cols="100" type="text" name="duty" placeholder="Please enter something" ></textarea> </td>
                             </tr>
 
-							 <tr>
-                                <td align="right">Date of Appointment:</td> <!-- set table data -->
-                                   
-                           <td><input type="date" name="appoint" /> <font color="red"><label><?=$error2?></label></font> </td>
-
-                            </tr>
-
-
- 							<tr>
-                                <td align="right">Doctor Name:</td> <!-- set table data -->
-                                
-                                <td><input type="text"  name="dname" placeholder="Please enter something" ></input> </td>
-                            </tr>
-
-
-
-                          <tr>
-                                <td align="right">Medicine:</td> <!-- set table data -->
-                                
-                                <td><textarea rows="8" cols="80" type="text" name="med" placeholder="Please enter something" ></textarea> </td>
-                            </tr>
-
-
-
-
-
-
-                            <tr>
-                                <td align="right">Advice:</td> <!-- set table data -->
-                                
-                                <td><textarea rows="8" cols="80" type="text" name="des" placeholder="Please enter something" ></textarea> </td>
-                            </tr>
+                           
                             <tr>
                                 <td></td>
-                                <td><input type="submit" name="submit" value="Make Prescription" class="btn" />  </td>
+                                <td><input type="submit" name="submit" value="Make Schedule" class="btn" />  </td>
                             </tr>
 
 					</table>

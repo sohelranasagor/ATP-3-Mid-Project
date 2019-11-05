@@ -12,7 +12,7 @@ router.get('*', function(request, response, next){
 });
 
 router.get('/',function(request, response){
-    staff.getInfo(request.session.email,function(result){  
+    staff.getInfo(request.session.email,function(result){
         response.render('staff/index',{user:result});
     });
     
@@ -87,10 +87,9 @@ router.get('/inbox',function(request, response){
 
 //change password...........
 
-router.get('/changePassword',function(request, response){
+router.get('/changePassword/:id',function(request, response){
   response.render('staff/changePassword');
 });
-
 //.............
 
 router.post('/',function(request, response){
@@ -151,21 +150,11 @@ router.post('/updateProfile',function(request, response){
 });
 
 
-//......
+
+
+//Change password
 
 router.post('/changePassword/:id',function(request, response){
-  request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
-  request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
-  request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
-  request.checkBody("newPassword", "New password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
-  request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
-  request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.newPassword);
-
-	const err = request.validationErrors();
-
-	if(err){		
-		response.render('staff/changePassword', {errors: err});
-	}else{
     var log ={
       email: request.session.email,
       password: request.body.oldPassword
@@ -199,9 +188,7 @@ router.post('/changePassword/:id',function(request, response){
         response.send("Your old password is incorrect");
       }
     });
-  }
-});
 
-//........................
+});
 
 module.exports = router;

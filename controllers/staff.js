@@ -45,13 +45,8 @@ router.get('/userList',function(request, response){
 
 //...........
 
-//update my profile.................
 
-router.get('/updateProfile',function(request, response){
-	staff.getInfo(request.session.email,function(result){    
-      response.render('staff/updateProfile',{user:result});
-  });
-});
+
 
 
 //Rest of mine..........
@@ -92,63 +87,37 @@ router.get('/changePassword/:id',function(request, response){
 });
 //.............
 
+
+//update my profile.................
+
+router.get('/updateProfile/:id',function(request, response){
+	staff.getInfo(request.session.email,function(result){    
+      response.render('staff/updateProfile',{user:result});
+  });
+});
+
 router.post('/',function(request, response){
     staff.getInfo(request.session.email,function(result){    
         response.render('staff/index',{user:result});
     });
     
 });
-//...............my profile posttt
 
-router.post('/updateProfile',function(request, response){
-  request.checkBody('firstName', 'Name field cannot be empty.').notEmpty();
-  request.checkBody('lastName', 'Name field cannot be empty.').notEmpty();
-  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
-  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
+//.......update profile
 
-	const err = request.validationErrors();
-
-	if(err){		
-		response.render('staff/updateProfile', {errors: err});
-	}else{
-    if(request.files){
-      var file = request.files.upfile,
-        filename=file.name;
-      var uploadpath ='/uploads/' + filename;
-      file.mv("./uploads/"+filename,function(err){
-        if(err){
-          console.log("File Upload Failed",err);
-          console.log(request.files.upfile.tempFilePath);
-          response.send("Error Occured!")
-        }
-        else {
-          var data ={
-            pic: uploadpath,
-            firstname: request.body.firstName,
-			lastname: request.body.lastName,
-            email: request.body.email
-          }
-          staff.updateStaff(data, function(status){
-            if(status)
-            {
-              staff.updateStaffLog(data, function(status){
-                if(status)
-                {
-                  response.redirect('/staff');
-                }
-              });
-            }
-          });
-        }
-      });
-    }
-    else {
-      response.send("No File selected !");
-      response.end();
-    }
+router.post('/updateProfile/:id',function(request,response){
+  var data = {
+      id: request.params.id,
+      firstname:request.body.firstName,
+      lastname:request.body.lastName,
+      dob:request.body.dob
   }
+  staff.updateStaff(data,function(status){
+    if(status){
+        response.redirect('/staff');
+    }
+  });
 });
-
 
 
 

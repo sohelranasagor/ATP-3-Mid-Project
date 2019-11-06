@@ -75,17 +75,12 @@ module.exports = {
 	//update profile
 
 	updateStaff: function(data, callback){
-		var sql = "update staff set firstname=?, lastname=?, email=?, pic=? where staffid=3";
-		db.execute(sql, [data.firstname,data.lastname,data.email,data.pic], function(status){
-			callback(status);
-		});
-	},
-	updateStaffLog: function(data, callback){
-		var sql = "update login set email=? where logid=8";
-		db.execute(sql, [data.email], function(status){
+		var sql = "update staff set firstname=?, lastname=?, dob=? where staffid=?";
+		db.execute(sql, [data.firstname,data.lastname,data.dob,data.id], function(status){
 			callback(status);
 		});
 	}
+	
 
 }
 

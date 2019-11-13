@@ -92,7 +92,30 @@ getById: function(id, callback){
 },
 
 
-
+checkPassword: function(log, callback){
+		var sql = "select * from login where email=? and password=?";
+		db.getResults(sql, [log.email,log.password], function(result){
+			if(result.length > 0)
+			{
+				callback(true);
+			}
+			else{
+				callback(false);
+			}
+		});
+	},
+	updatePasswordLog: function(data, callback){
+		var sql = "update login set password=? where logid=?";
+		db.execute(sql, [data.password,data.logId], function(status){
+			callback(status);
+		});
+	},
+	updatePassword: function(data, callback){
+		var sql = "update doctors set password=? where id=?";
+		db.execute(sql, [data.password,data.id], function(status){
+			callback(status);
+		});
+	},
 
 
 
@@ -203,42 +226,54 @@ getscheduleById: function(id, callback){
 	},
 
 
+insertmsg: function(data, callback){
 
-
-
-
-
-
-
-
-
-
-/*
-update: function(doctors, callback){
-		//var sql ="update doctors set username=?, password=? where id=?";
-
-
-
-	//var sql ="update doctors set firstname = doctors.firstname, lastname = doctors.lastname , dob = doctors.dob, gender = doctors.gender, designation = doctors.designation,  email = doctors.email,  phone = doctors.phone, city = doctors.city, location = doctors.location, password = doctors.password where uid = doctors.uid";
-
-
-	
-	/*	db.execute(sql, [user.username, user.password, user.id], function(status){
-			callback(status);
-		});*/
-/*
-	var sql ="update doctors set firstname=?, lastname =?, dob =?, gender =?, designation =?,  email =?,  phone =?, city =?, location =?, password =? where uid=?";
-db.execute(sql, [doctors.uid, doctors.firstname, doctors.lastname, doctors.dob, doctors.gender, doctors.designation, doctors.email, doctors.phone, doctors.city, doctors.location, doctors.password], function(status){
-
-//db.execute(sql, function(status){
+		var sql ="insert into sendmsg values('', ?, ?)";
+		db.execute(sql, [data.receiver, data.msg], function(status){
 			callback(status);
 		});
+	},
 
 
 
 
 
-	},*/
+
+
+
+
+
+getAllInbox: function(callback){
+		var sql = "select * from inbox";
+		
+		db.getResults(sql, [], function(result){         /////okk
+			
+			if(result.length > 0){
+				callback(result);
+			}else{
+				callback([]);
+			}
+		});	
+	},
+
+
+
+getmsgById: function(id, callback){
+
+			var sql = "select * from inbox where id=?";
+			db.getResults(sql, [id], function(result){
+				if(result.length > 0 ){
+					callback(result[0]);
+				}else{
+					callback([]);
+				}
+			});
+	},
+
+
+
+
+
 
 
 update: function(doctors, callback){

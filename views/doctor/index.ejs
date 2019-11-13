@@ -47,7 +47,7 @@
                                         </button>
                                         <div class="dropdown-content">
 										<a href="/doctor/profile">My profile</a>
-                                        <a href="/doctor/changePassword">Change Password</a>
+                                        <a href="/doctor/changePassword/<%= user.id %>">Change Password</a>
                                     </div>
 									</div> 
 									<div class="dropdown">
@@ -92,12 +92,12 @@
 										</div>
 
                                         <div class="dropdown">
-										<button class="dropbtn">Assistant
+										<button class="dropbtn">Messages
 										<i class="fa fa-caret-down"></i>
 										</button>
 										<div class="dropdown-content">
-										<a href="/doctor/addassistant">Add Assistant</a>
-										<a href="/doctor/assistantlist">Assistant List</a>
+										<a href="/doctor/inbox">inbox</a>
+										<a href="/doctor/sendmsg">Send Message</a>
 										</div>
 									   </div>
 

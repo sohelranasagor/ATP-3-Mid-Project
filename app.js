@@ -5,7 +5,8 @@ var ejs = require('ejs');
 var expSession = require('express-session');
 var upload = require('express-fileupload');
 var exValidator = require('express-validator');
-var registration = require('./controllers/registration');
+//var registration = require('./controllers/registration');
+var registration = require('./controllers/doctor_registration');
 var login = require('./controllers/login');
 var user = require('./controllers/user');
 var logout = require('./controllers/logout');
@@ -24,6 +25,7 @@ app.use('/CSS', express.static('CSS'));
 app.use(exValidator());
 app.use('/uploads', express.static('uploads'));
 app.use(upload());
+//app.use('/registration', registration);
 app.use('/registration', registration);
 app.use('/login', login);
 app.use('/user', user);
@@ -34,7 +36,9 @@ app.use('/doctor', doctor);
 app.use('/Script', express.static('Script'));
 
 //ROUTER
-
+app.get('/', function(request, response){
+	response.sendFile('landing.ejs');
+});
 //SERVER STARTUP
 app.listen(3000,function(){
     console.log('server started at 3000...');

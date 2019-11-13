@@ -1,7 +1,6 @@
 var express = require('express');
 var doctor_model = require('../models/doctor_model');
 
-//var admin = require('../models/admin_model');
 var router = express.Router();
 
 router.get('*', function(request, response, next){
@@ -12,7 +11,7 @@ router.get('*', function(request, response, next){
 	}
     
 });
-
+////////////////landing/////////////
 router.get('/',function(request, response){
   doctor_model.getInfo(request.session.email,function(result){
       if(result)
@@ -30,7 +29,7 @@ router.get('/',function(request, response){
     
 });
 
-
+///////////////profile///////////////
 router.get('/profile',function(request, response){
   doctor_model.getInfo(request.session.email,function(result){    
       response.render('doctor/profile',{user:result});
@@ -104,6 +103,63 @@ const err = request.validationErrors();
       response.send("No File selected !");
       response.end();
     }
+  }
+});
+
+
+
+/////////////change password//////////////
+router.get('/changePassword/:id',function(request, response){
+  response.render('doctor/changePassword');
+});
+
+
+router.post('/changePassword/:id',function(request, response){
+  request.checkBody('oldPassword', 'Old password field cannot be empty.').notEmpty();
+  request.checkBody('newPassword', 'New password field cannot be empty.').notEmpty();
+  //request.checkBody('newPassword', 'New password must be between 6-30 characters long.').len(6, 30);
+  //request.checkBody("newPassword", "New password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
+  request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
+  request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.newPassword);
+
+  const err = request.validationErrors();
+
+  if(err){    
+    response.render('doctor/changePassword', {errors: err});
+  }else{
+    var log ={
+      email: request.session.email,
+      password: request.body.oldPassword
+    }
+    doctor_model.checkPassword(log, function(result){
+      if(result)
+      {
+        var data ={
+          logId: request.session.lid,
+          password: request.body.newPassword,
+          id: request.params.id
+        }
+        doctor_model.updatePasswordLog(data, function(status){
+          if(status)
+          {
+            doctor_model.updatePassword(data, function(status){
+              if(status)
+              {
+                response.redirect('/doctor');
+              }
+            });
+          }
+          else
+          {
+            response.send("Error updating");
+          }
+        });
+      }
+      else
+      {
+        response.send("Your old password is incorrect");
+      }
+    });
   }
 });
 
@@ -189,10 +245,6 @@ router.post('/addPhotegallery', function(request, response){
   }
 });
 
-
-
-
-
 ///////////patient list//////////
 router.get('/patientList',function(request, response){
     doctor_model.getAllPatient(function(results){    
@@ -208,9 +260,6 @@ router.get('/appointmentList',function(request, response){
     
 });
 
-
-
-
 //////////prescription//////
 router.get('/addPrescription', function(request, response){
   response.render("doctor/addprescription");
@@ -220,6 +269,26 @@ router.get('/addPrescription', function(request, response){
 
 
 router.post('/addPrescription', function(request, response){
+
+ request.checkBody('pname', 'pname cannot be empty.').notEmpty();
+  request.checkBody('age', 'age cannot be empty.').notEmpty();
+
+  request.checkBody('appoint', 'appoint cannot be empty.').notEmpty();
+
+ request.checkBody('dname', 'dname cannot be empty.').notEmpty();
+
+ request.checkBody('med', 'medicine cannot be empty.').notEmpty();
+  request.checkBody('des', 'advice cannot be empty.').notEmpty();
+
+  const err = request.validationErrors();
+
+  if(err){    
+    response.render('doctor/addPrescription', {errors: err});
+}
+
+
+
+	else{
   var data ={
    pname: request.body.pname,
    age: request.body.age,
@@ -240,6 +309,7 @@ doctor_model.insertPrescribe(data, function(status){
 
     }
   });
+}
 });
 
 
@@ -274,6 +344,18 @@ router.get('/addSchedule', function(request, response){
 
 
 router.post('/addSchedule', function(request, response){
+
+
+	 request.checkBody('date', 'date cannot be empty.').notEmpty();
+  request.checkBody('time', 'time field cannot be empty.').notEmpty();
+
+  request.checkBody('duty', 'duty cannot be empty.').notEmpty();
+  const err = request.validationErrors();
+
+  if(err){    
+    response.render('doctor/addSchedule', {errors: err});
+}
+else{
   var data ={
    date: request.body.date,
    time: request.body.time,
@@ -292,6 +374,7 @@ doctor_model.insertSchedule(data, function(status){
 
     }
   });
+}
 });
 
 
@@ -303,10 +386,6 @@ router.get('/scheduleList', function(request, response){
     }); 
 });
 
-
-
-
-
 router.get('/viewSchedule/:id', function(request, response){
 
   doctor_model.getscheduleById(request.params.id, function(result){
@@ -315,307 +394,61 @@ router.get('/viewSchedule/:id', function(request, response){
 });
 
 
+////////////message//////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-/*
-
-
-
-if(err){    
-
-
-
- var user = { 
-          
-            firstname: request.body.firstname,
-            lastname: request.body.lastname,
-            dob: request.body.dob,
-            gender: request.body.gender,
-          designation: request.body.designation,
-          
-             email: request.body.email,
-            phone: request.body.phnNo+request.body.phnNo1,
-           
-            city: request.body.city,
-            location: request.body.location,
-            password: request.body.password,
-             pic: uploadpath,
-             id: request.params.id
-  };
-
-
-
-
-
-
-
-
-
-  doctor_model.updateDoctor(user, function(status){
+router.get('/inbox', function(request, response){
     
-    if(status){
-      response.redirect('/doctor/index');
-    }else{
-      response.redirect('/doctor/editprofile/'+request.params.id);
+    doctor_model.getAllInbox(function(result){
+      response.render('doctor/inbox',{data:result});    
+    }); 
+});
+
+
+
+
+router.get('/viewmsg/:id', function(request, response){
+
+  doctor_model.getmsgById(request.params.id, function(result){
+    response.render('doctor/viewmsg', result);
+  })
+});
+
+router.get('/sendmsg', function(request, response){
+  response.render("doctor/sendmsg");
+});
+
+
+router.post('/sendmsg', function(request, response){
+ request.checkBody('receiver', 'receiver cannot be empty.').notEmpty();
+  request.checkBody('msg', 'message field cannot be empty.').notEmpty();
+
+  
+  const err = request.validationErrors();
+
+  if(err){    
+    response.render('doctor/sendmsg', {errors: err});
+}
+
+
+
+else{
+
+  var data ={
+   receiver: request.body.receiver,
+   msg: request.body.msg
+  
+  }
+doctor_model.insertmsg(data, function(status){
+    if(status)
+    {
+
+     // response.send("done");
+      response.redirect("/doctor");
+
     }
   });
-  
-});*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//router.post('/editprofile',function(request, response){
- /* request.checkBody('name', 'Name field cannot be empty.').notEmpty();
-  request.checkBody('email', 'Email field cannot be empty.').notEmpty();
-  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
-
-
-
-
-  /////////////////
-
-  request.checkBody('firstname', 'First name field cannot be empty.').notEmpty();
-  request.checkBody('lastname', 'Last name field cannot be empty.').notEmpty();
-  request.checkBody('dob', 'Date of Birth field cannot be empty.').notEmpty();
-  request.checkBody('gender', 'Gender must be select.').notEmpty();
-
- request.checkBody('designation', 'designation must be selected.').notEmpty();
-
- request.checkBody('email', 'Email field cannot be empty.').notEmpty();
-  request.checkBody('email', 'invalid email.').matches(/@.+\.com/, 'i');
-  request.checkBody('phone', 'Phone number cannot be empty').notEmpty();
- 
-  
-  request.checkBody('city', 'City field cannot be empty.').notEmpty();
-  request.checkBody('location', 'Location field cannot be empty.').notEmpty();
-  request.checkBody('password', 'Password field cannot be empty.').notEmpty();
- // request.checkBody('password', 'Password must be between 6-30 characters long.').len(6, 30);
- //request.checkBody("password", "Password must contain atleast one of the special characters [@,#,$,%]").matches(/[@#$%]/, "i");
-  //request.checkBody('confirmPassword', 'Confirm password field cannot be empty.').notEmpty();
- // request.checkBody('confirmPassword', 'Password and Confirm password must match.').equals(request.body.password);
-
-	const err = request.validationErrors();
-
-	if(err){		
-		response.render('doctor/editprofile', {errors: err});
-	}else{
-    if(request.files){
-      var file = request.files.upfile,
-        filename=file.name;
-      var uploadpath ='/uploads/' + filename;
-      file.mv("./uploads/"+filename,function(err){
-        if(err){
-          console.log("File Upload Failed",err);
-          console.log(request.files.upfile.tempFilePath);
-          response.send("Error Occured!")
-        }
-        else {
-          var data ={
-           // pic: uploadpath,
-           
-
-
-            //name: request.body.name,
-           // email: request.body.email
-            // pic: uploadpath,
-             pic: uploadpath,
-			firstname: request.body.firstname,
-            lastname: request.body.lastname,
-            dob: request.body.dob,
-            gender: request.body.gender,
-
-          
-             email: request.body.email,
-            phone: request.body.phnNo+request.body.phnNo1,
-           
-            city: request.body.city,
-            location: request.body.location,
-            password: request.body.password
-         
 }
-          doctor_model.updateDoctor(data, function(status){
-            if(status)
-            {
-              doctor_model.updateDoctorLog(data, function(status){
-                if(status)
-                {
-                  response.redirect('/doctor');
-                }
-              });
-            }
-          });
-        }
-      });
-    }
-    else {
-      response.send("No File selected !");
-      response.end();
-    }
-  }
 });
-
-*/
-
-/*
-
-router.get('/viewall',function(request, response){
-    doctor_model.getInfo(request.session.email, function(result){            ////right one
-        response.render('doctor/viewall',result);
-    });
-    
-});
-
-
-
-
-router.get('/details', function(request, response){
-		
-	doctor_model.getAll(function(results){
-			response.render('doctor/details', {doctors: results});		
-		});	
-});
-
-/*
-router.get('/viewall/:uid', function(request, response){
-
-doctor_model.getById(request.params.uid, function(result){
-		response.render('doctor/viewall', result);
-	})
-});
-
-
-
-
-router.get('/edit/:id', function(request, response){
-
-	doctor_model.getById(request.params.id, function(result){
-		response.render('doctor/edit', result);
-	});
-	
-});
-
-router.post('/edit/:id', function(request, response){
-
-	var doctors = {
-
-		
-		
-		firstname: request.body.firstname,
-
-        lastname: request.body.lastname,
-        dob: request.body.dob,
-        gender: request.body.gender,
-        designation: request.body.designation,
-        email: request.body.email,
-        phone: request.body.phone,
-        city: request.body.city,
-        location: request.body.location,
-		password: request.body.password,
-		uid: request.params.uid,
-	};
-
-	doctor_model.update(doctors, function(status){
-		
-		if(status){
-		//	response.redirect('/doctor/viewall');
-
-         response.send("done");
-
-
-
-		}else{
-			response.redirect('/doctor/edit/'+request.params.uid);
-		}
-	});
-	
-});
-
-*/
-
-
-
-
-
-
-
-
 
 
 module.exports = router;
